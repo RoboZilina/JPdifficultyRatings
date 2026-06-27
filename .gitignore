@@ -1,0 +1,14 @@
+# VS Code
+.vscode/
+*.code-workspace
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Node / dependencies (if applicable)
+node_modules/
+.env
+
+# Zip files (unpack if tracking source)
+*.zip
