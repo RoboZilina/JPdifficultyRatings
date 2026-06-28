@@ -171,37 +171,88 @@ Keep entries minimal. Include only what's necessary for matching and rating.
 4. **Overlay** - If a match is found, difficulty ratings are displayed; if not, a fallback UI is shown
 5. **Local Storage** - User mappings are saved locally in Chrome storage and merged with the community database
 
-## Building the Database
+## Building the Database (5000+ Titles)
 
-The extension comes with a small sample database (3 titles). To expand it with hundreds of anime, use the curation tools:
+The extension comes with a sample database (3 titles). Use the comprehensive tools to build a 5000+ title database with difficulty ratings.
 
-### Quick Start
+### Quick Start (3 commands)
 
 ```bash
-# 1. Fetch popular anime from anime-offline-database
-npm run fetch
+# 1. Download 10,000+ anime from anime-offline-database
+npm run download
 
-# 2. Edit tools/RATINGS_TEMPLATE.csv and add LearnNatively & jpdb ratings
-nano tools/RATINGS_TEMPLATE.csv
+# 2. Extract and organize top 5,000 into CSV batches
+npm run extract
+npm run generate-batches
 
-# 3. Convert CSV to media-index.json
-npm run build
-
-# 4. Validate the database
-npm run validate
+# 3. After adding ratings → Merge and deploy
+npm run validate:csv batch-001.csv
+node tools/build-database.js --import-ratings batch-001.csv
+npm run merge
 ```
 
-For detailed instructions, see [tools/CURATION_GUIDE.md](tools/CURATION_GUIDE.md).
+### Complete Workflow
+
+See **[tools/WORKFLOW.md](tools/WORKFLOW.md)** for step-by-step instructions:
+- Phase 1: Download (1-2 min)
+- Phase 2: Extract (5 min)
+- Phase 3: Generate CSV batches (1 min)
+- Phase 4: Rate anime (50+ hours, team distributed)
+- Phase 5: Import and validate
+- Phase 6: Merge final database (1 min)
+- Phase 7: Deploy to extension
+
+**Time estimate:** 
+- **Solo:** 3-4 weeks
+- **Team of 5:** 1 week
+- **MVP (500 titles):** 2-3 days
+
+### All Commands
+
+```bash
+npm run download           # Download anime-offline-database
+npm run extract           # Extract 5000 anime
+npm run generate-batches  # Split into CSV batches
+npm run generate-batch:range A D  # Generate specific range
+npm run track            # Show coverage statistics
+npm run track:gaps       # Find ratings gaps
+npm run validate:csv     # Validate a CSV batch
+npm run validate:candidates  # Validate all candidates
+npm run merge            # Create final media-index.json
+npm run stats            # Show database statistics
+npm run enrich:sample    # Enrich metadata with AniList (optional)
+npm run help             # Show all available commands
+```
+
+### Database Structure
+
+```
+Phase 1-2: Download & Extract
+├── anime-offline-database.json (10,000+ anime from GitHub)
+└── extracted-candidates.json (5,000 filtered, most popular)
+
+Phase 3: Generate Batches
+├── batch-001.csv (500 anime)
+├── batch-002.csv (500 anime)
+├── ...
+└── batch-010.csv (final 500)
+
+Phase 4: Rate (Human work)
+├── (Edit CSVs with LearnNatively & jpdb ratings)
+└── (Add Netflix/Crunchyroll platform aliases)
+
+Phase 5: Import & Merge
+└── media-index.json (final 5000 anime with ratings)
+```
 
 ### Database Sources
 
-The curation workflow uses these public sources:
+- **anime-offline-database** - 10,000+ anime with aliases (public GitHub)
+- **LearnNatively** - Difficulty levels 1-60+ (manual entry required)
+- **jpdb** - Vocab difficulty 1-100 (manual entry required)
+- **Netflix/Crunchyroll** - Platform aliases (manual mapping)
 
-- **anime-offline-database** - Title aliases and metadata
-- **LearnNatively** - Japanese difficulty levels (manual entry)
-- **jpdb** - Kanji/vocab difficulty numbers (manual entry)
-
-See the [Title Source Recommendations](JP_Difficulty_Overlay_Title_Source_Recommendations.md) document for details on all available sources.
+See [tools/CURATION_GUIDE.md](tools/CURATION_GUIDE.md) and [tools/SCALING_GUIDE.md](tools/SCALING_GUIDE.md) for detailed sourcing strategies.
 
 ## Development
 

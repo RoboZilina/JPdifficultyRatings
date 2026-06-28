@@ -4,6 +4,33 @@ Thank you for helping build this community extension!
 
 This project is maintained by and for a small community of Japanese learners. The goal is to show difficulty ratings on Netflix and Crunchyroll using a minimal, local, community-maintained metadata index.
 
+## Building the Database (5000+ Titles)
+
+We're scaling the database from a handful of titles to 5000+ anime with ratings. This is a big effort that requires community help.
+
+**See the complete workflow:**
+- **[WORKFLOW.md](tools/WORKFLOW.md)** - Step-by-step guide (7 phases)
+- **[SCALING_GUIDE.md](tools/SCALING_GUIDE.md)** - Strategies for distributing the work
+- **[CURATION_GUIDE.md](tools/CURATION_GUIDE.md)** - How to rate anime
+
+**The process:**
+1. Download 10,000+ anime from anime-offline-database
+2. Extract top 5,000 most popular
+3. Split into 500-title CSV batches
+4. Community rates each batch with LearnNatively + jpdb difficulty
+5. Merge into final database
+
+**How to contribute:**
+- **Rate a batch:** Claim a batch (A-E, F-J, etc.) and add difficulties
+- **Form a team:** Organize with friends to split the work
+- **Share resources:** If you find rating sources, share with the community
+
+**Time commitment:**
+- Solo: 500 titles in 5-8 hours
+- Team: 5000 titles in 1-2 weeks
+
+All contributions are valued, even partial ones (50% coverage is useful!).
+
 ## What You Can Contribute
 
 ### Add or Update Entries in `media-index.json`
