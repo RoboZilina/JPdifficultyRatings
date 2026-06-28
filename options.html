@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JP Difficulty Overlay - Settings</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 28px;
+        margin-bottom: 8px;
+      }
+
+      .header p {
+        opacity: 0.9;
+        font-size: 14px;
+      }
+
+      .content {
+        padding: 30px;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .section-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #667eea;
+      }
+
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      label {
+        display: block;
+        font-size: 13px;
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 6px;
+      }
+
+      input[type="text"],
+      input[type="number"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 13px;
+        font-family: inherit;
+        transition: all 0.2s ease;
+      }
+
+      input[type="text"]:focus,
+      input[type="number"]:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      @media (max-width: 600px) {
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        width: 100%;
+        padding: 12px;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-secondary {
+        background: #f0f0f0;
+        color: #333;
+        margin-right: 8px;
+      }
+
+      .btn-secondary:hover {
+        background: #e0e0e0;
+      }
+
+      .btn-danger {
+        background: #f5576c;
+        color: white;
+      }
+
+      .btn-danger:hover {
+        background: #e0425a;
+      }
+
+      .btn-success {
+        background: #26de81;
+        color: white;
+      }
+
+      .btn-success:hover {
+        background: #20b969;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 8px;
+        margin-top: 24px;
+      }
+
+      .button-group button {
+        flex: 1;
+        padding: 12px;
+      }
+
+      .mappings-list {
+        background: #f9f9f9;
+        border-radius: 8px;
+        max-height: 400px;
+        overflow-y: auto;
+      }
+
+      .mapping-item {
+        padding: 12px;
+        border-bottom: 1px solid #e0e0e0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mapping-item:last-child {
+        border-bottom: none;
+      }
+
+      .mapping-title {
+        font-weight: 500;
+        color: #333;
+        font-size: 13px;
+      }
+
+      .mapping-subtitle {
+        font-size: 11px;
+        color: #999;
+        margin-top: 2px;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #999;
+      }
+
+      .empty-state p {
+        font-size: 13px;
+      }
+
+      .alert {
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin-bottom: 16px;
+        font-size: 13px;
+      }
+
+      .alert-info {
+        background: #d4edff;
+        color: #0c5aa0;
+        border-left: 4px solid #0c5aa0;
+      }
+
+      .alert-success {
+        background: #d4f5d4;
+        color: #155724;
+        border-left: 4px solid #155724;
+      }
+
+      .help-text {
+        font-size: 12px;
+        color: #999;
+        margin-top: 4px;
+      }
+
+      .mapping-actions {
+        display: flex;
+        gap: 6px;
+      }
+
+      .btn-small {
+        padding: 6px 12px;
+        font-size: 11px;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      @media (max-width: 600px) {
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>日本語 Difficulty</h1>
+        <p>JP Difficulty Overlay Settings</p>
+      </div>
+
+      <div class="content">
+        <!-- Add New Mapping Section -->
+        <div class="section">
+          <h2 class="section-title">Add New Local Mapping</h2>
+
+          <div class="alert alert-info">
+            <strong>How it works:</strong> Add titles not found in the community
+            database. Local mappings are stored privately in your browser and
+            can be exported to share with the community.
+          </div>
+
+          <form id="mapping-form">
+            <div class="form-group">
+              <label for="detected-title"
+                >Detected Title (as seen on Netflix/Crunchyroll)</label
+              >
+              <input
+                type="text"
+                id="detected-title"
+                placeholder="e.g., DELICIOUS IN DUNGEON"
+                required
+              />
+              <p class="help-text">
+                This is what the extension detected. You can usually find it in
+                the overlay.
+              </p>
+            </div>
+
+            <div class="form-group">
+              <label for="canonical-id">Canonical ID</label>
+              <input
+                type="text"
+                id="canonical-id"
+                placeholder="e.g., delicious-in-dungeon"
+                required
+              />
+              <p class="help-text">
+                A unique identifier (lowercase, hyphens, no spaces).
+              </p>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="title-en">English Title</label>
+                <input
+                  type="text"
+                  id="title-en"
+                  placeholder="e.g., Delicious in Dungeon"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="title-ja">Japanese Title</label>
+                <input
+                  type="text"
+                  id="title-ja"
+                  placeholder="e.g., ダンジョン飯"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="title-romaji">Romaji Title</label>
+              <input
+                type="text"
+                id="title-romaji"
+                placeholder="e.g., Dungeon Meshi"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="aliases"
+                >Aliases (comma-separated)</label
+              >
+              <textarea
+                id="aliases"
+                placeholder="e.g., delicious in dungeon, dungeon meshi, ダンジョン飯"
+              ></textarea>
+              <p class="help-text">
+                Alternative names that help with matching. Separate with
+                commas.
+              </p>
+            </div>
+
+            <div class="two-col">
+              <div class="form-group">
+                <label for="learnnatively-level"
+                  >LearnNatively Level</label
+                >
+                <input
+                  type="number"
+                  id="learnnatively-level"
+                  placeholder="e.g., 18"
+                  min="0"
+                  max="100"
+                />
+              </div>
+              <div class="form-group">
+                <label for="learnnatively-jlpt"
+                  >LearnNatively JLPT Approx</label
+                >
+                <select id="learnnatively-jlpt">
+                  <option value="">-- None --</option>
+                  <option value="N5">N5</option>
+                  <option value="N4">N4</option>
+                  <option value="N3">N3</option>
+                  <option value="N2">N2</option>
+                  <option value="N1">N1</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="learnnatively-url">LearnNatively URL</label>
+              <input
+                type="text"
+                id="learnnatively-url"
+                placeholder="https://learnnatively.com/..."
+              />
+            </div>
+
+            <div class="two-col">
+              <div class="form-group">
+                <label for="jpdb-difficulty">jpdb Difficulty</label>
+                <input
+                  type="number"
+                  id="jpdb-difficulty"
+                  placeholder="e.g., 9"
+                  min="0"
+                  max="100"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="jpdb-url">jpdb URL</label>
+              <input
+                type="text"
+                id="jpdb-url"
+                placeholder="https://jpdb.io/..."
+              />
+            </div>
+
+            <button type="submit" class="btn-primary">Save Local Mapping</button>
+          </form>
+        </div>
+
+        <!-- My Mappings Section -->
+        <div class="section">
+          <h2 class="section-title">My Local Mappings</h2>
+
+          <div id="mappings-container" class="mappings-list">
+            <div class="empty-state">
+              <p>No local mappings yet.</p>
+            </div>
+          </div>
+
+          <div class="button-group" style="margin-top: 16px">
+            <button id="export-json" class="btn-success">
+              📥 Export as JSON
+            </button>
+            <button id="clear-mappings" class="btn-danger">
+              🗑️ Clear All
+            </button>
+          </div>
+
+          <p class="help-text" style="margin-top: 16px">
+            <strong>Export:</strong> Download your local mappings to share with
+            the community for review. <br />
+            <strong>Import:</strong> Paste exported JSON into the form below to
+            restore or merge mappings.
+          </p>
+        </div>
+
+        <!-- Import Section -->
+        <div class="section">
+          <h2 class="section-title">Import Mappings</h2>
+
+          <div class="form-group">
+            <label for="import-json">Paste JSON</label>
+            <textarea
+              id="import-json"
+              placeholder="Paste exported JSON here to import..."
+            ></textarea>
+          </div>
+
+          <button id="import-button" class="btn-primary">Import Mappings</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="options.js"></script>
+  </body>
+</html>

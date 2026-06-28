@@ -1,0 +1,118 @@
+[
+  {
+    "id": "bocchi-the-rock",
+    "workType": "anime-series",
+    "canonicalTitle": "Bocchi the Rock!",
+    "titles": {
+      "en": "Bocchi the Rock!",
+      "ja": "ぼっち・ざ・ろっく！",
+      "romaji": "Bocchi the Rock"
+    },
+    "aliases": [
+      "bocchi the rock",
+      "btr",
+      "ぼっちざろっく",
+      "ぼっち ざ ろっく"
+    ],
+    "platformAliases": {
+      "netflix": [],
+      "crunchyroll": [
+        "BOCCHI THE ROCK!",
+        "Bocchi the Rock!"
+      ]
+    },
+    "ratings": {
+      "learnnatively": {
+        "level": 20,
+        "jlptApprox": "N3",
+        "url": "https://learnnatively.com/"
+      },
+      "jpdb": {
+        "difficulty": 7,
+        "url": "https://jpdb.io/"
+      }
+    },
+    "metadata": {
+      "status": "verified",
+      "lastVerified": "2026-06-26",
+      "notes": "Minimal difficulty metadata only."
+    }
+  },
+  {
+    "id": "delicious-in-dungeon",
+    "workType": "anime-series",
+    "canonicalTitle": "Delicious in Dungeon",
+    "titles": {
+      "en": "Delicious in Dungeon",
+      "ja": "ダンジョン飯",
+      "romaji": "Dungeon Meshi"
+    },
+    "aliases": [
+      "delicious in dungeon",
+      "dungeon meshi",
+      "ダンジョン飯",
+      "ダンジョンめし"
+    ],
+    "platformAliases": {
+      "netflix": [
+        "DELICIOUS IN DUNGEON",
+        "Delicious in Dungeon"
+      ],
+      "crunchyroll": []
+    },
+    "ratings": {
+      "learnnatively": {
+        "level": 18,
+        "jlptApprox": "N3",
+        "url": "https://learnnatively.com/"
+      },
+      "jpdb": {
+        "difficulty": 9,
+        "url": "https://jpdb.io/"
+      }
+    },
+    "metadata": {
+      "status": "verified",
+      "lastVerified": "2026-06-26",
+      "notes": "Popular Netflix anime."
+    }
+  },
+  {
+    "id": "frieren-beyond-journeys-end",
+    "workType": "anime-series",
+    "canonicalTitle": "Frieren: Beyond Journey's End",
+    "titles": {
+      "en": "Frieren: Beyond Journey's End",
+      "ja": "葬送のフリーレン",
+      "romaji": "Sousou no Frieren"
+    },
+    "aliases": [
+      "frieren",
+      "sousou no frieren",
+      "frieren beyond journeys end",
+      "葬送のフリーレン"
+    ],
+    "platformAliases": {
+      "crunchyroll": [
+        "Frieren: Beyond Journey's End"
+      ],
+      "netflix": []
+    },
+    "ratings": {
+      "learnnatively": {
+        "level": 25,
+        "jlptApprox": "N2",
+        "url": "https://learnnatively.com/"
+      },
+      "jpdb": {
+        "difficulty": 20,
+        "url": "https://jpdb.io/"
+      }
+    },
+    "metadata": {
+      "status": "verified",
+      "lastVerified": "2026-06-26",
+      "notes": "Crunchyroll series."
+    }
+  }
+]
