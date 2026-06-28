@@ -1,4 +1,4 @@
-# VS Code
+﻿# VS Code
 .vscode/
 *.code-workspace
 
@@ -10,5 +10,11 @@ Desktop.ini
 node_modules/
 .env
 
-# Zip files (unpack if tracking source)
+# Binary exports (use .md as source)
+*.docx
+
+# Compressed archives
 *.zip
+
+# Generated build output
+data/

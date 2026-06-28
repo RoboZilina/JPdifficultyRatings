@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "JP Difficulty Overlay",
+  "version": "0.1.0",
+  "description": "Adds Japanese-learning difficulty ratings to Netflix and Crunchyroll using a local community-maintained index.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.netflix.com/*",
+    "https://www.crunchyroll.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.netflix.com/*",
+        "https://www.crunchyroll.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "media-index.json"
+      ],
+      "matches": [
+        "https://www.netflix.com/*",
+        "https://www.crunchyroll.com/*"
+      ]
+    }
+  ],
+  "options_page": "options.html"
+}

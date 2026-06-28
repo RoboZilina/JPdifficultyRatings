@@ -1,0 +1,659 @@
+// JP Difficulty Overlay - Content Script
+
+// ============================================================================
+// Global State
+// ============================================================================
+
+let mediaItems = [];
+let searchIndex = new Map();
+let lastUrl = location.href;
+let lastDetectedTitle = null;
+let updateTimer = null;
+let currentOverlayElement = null;
+
+// ============================================================================
+// Platform Detection
+// ============================================================================
+
+function getPlatform() {
+  const host = window.location.hostname;
+
+  if (host.includes("netflix.com")) {
+    return "netflix";
+  }
+
+  if (host.includes("crunchyroll.com")) {
+    return "crunchyroll";
+  }
+
+  return "unknown";
+}
+
+// ============================================================================
+// Load Bundled Media Index
+// ============================================================================
+
+async function loadMediaIndex() {
+  const url = chrome.runtime.getURL("media-index.json");
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`Failed to load media-index.json: ${response.status}`);
+  }
+
+  return await response.json();
+}
+
+// ============================================================================
+// Chrome Storage Helpers
+// ============================================================================
+
+function getUserMappings() {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(["userMappings"], (result) => {
+      if (chrome.runtime.lastError) {
+        reject(chrome.runtime.lastError);
+        return;
+      }
+
+      const mappings = result.userMappings || [];
+      resolve(mappings);
+    });
+  });
+}
+
+// ============================================================================
+// Title Normalization
+// ============================================================================
+
+function normalizeTitle(title) {
+  if (!title) return "";
+
+  return String(title)
+    .toLowerCase()
+    .normalize("NFKC")
+    .replace(/\b(subbed|dubbed|sub|dub)\b/g, " ")
+    .replace(/\b(tv series|series|movie|ova|ona|special)\b/g, " ")
+    .replace(/\bseason\s*\d+\b/g, " ")
+    .replace(/\bs\d+\b/g, " ")
+    .replace(/[!！?？:：;；''""".,・·•\-–—_()[\]{}<>]/g, " ")
+    .replace(/&/g, " and ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function normalizeTitleCompact(title) {
+  return normalizeTitle(title).replace(/\s+/g, "");
+}
+
+// ============================================================================
+// Build Search Index
+// ============================================================================
+
+async function buildSearchIndex() {
+  const bundledItems = await loadMediaIndex();
+  const userMappings = await getUserMappings();
+
+  mediaItems = [...bundledItems, ...userMappings];
+  searchIndex.clear();
+
+  console.log("[JP Difficulty Overlay] Building search index with", mediaItems.length, "items");
+
+  for (const item of mediaItems) {
+    // Index canonical title
+    if (item.canonicalTitle) {
+      addToSearchIndex(item.canonicalTitle, item.id);
+    }
+
+    // Index all titles
+    if (item.titles) {
+      if (item.titles.en) addToSearchIndex(item.titles.en, item.id);
+      if (item.titles.ja) addToSearchIndex(item.titles.ja, item.id);
+      if (item.titles.romaji) addToSearchIndex(item.titles.romaji, item.id);
+    }
+
+    // Index aliases
+    if (item.aliases && Array.isArray(item.aliases)) {
+      for (const alias of item.aliases) {
+        addToSearchIndex(alias, item.id);
+      }
+    }
+
+    // Index platform-specific aliases
+    if (item.platformAliases) {
+      const platformAliases = item.platformAliases.netflix || [];
+      const crunchyrollAliases = item.platformAliases.crunchyroll || [];
+
+      for (const alias of [...platformAliases, ...crunchyrollAliases]) {
+        addToSearchIndex(alias, item.id);
+      }
+    }
+  }
+
+  console.log("[JP Difficulty Overlay] Search index built with", searchIndex.size, "keys");
+}
+
+function addToSearchIndex(alias, itemId) {
+  if (!alias || !itemId) return;
+
+  const normal = normalizeTitle(alias);
+  const compact = normalizeTitleCompact(alias);
+
+  if (normal) searchIndex.set(normal, itemId);
+  if (compact && compact !== normal) searchIndex.set(compact, itemId);
+}
+
+// ============================================================================
+// Search and Matching
+// ============================================================================
+
+function findMediaItem(detectedTitle) {
+  if (!detectedTitle) {
+    console.log("[JP Difficulty Overlay] No title detected");
+    return null;
+  }
+
+  const normalKey = normalizeTitle(detectedTitle);
+  const compactKey = normalizeTitleCompact(detectedTitle);
+
+  console.log("[JP Difficulty Overlay] Detected title:", detectedTitle);
+  console.log("[JP Difficulty Overlay] Normalized key:", normalKey);
+  console.log("[JP Difficulty Overlay] Compact key:", compactKey);
+  console.log("[JP Difficulty Overlay] Search index size:", searchIndex.size);
+  console.log("[JP Difficulty Overlay] Sample keys:", Array.from(searchIndex.keys()).slice(0, 10));
+
+  const itemId = searchIndex.get(normalKey) || searchIndex.get(compactKey);
+
+  console.log("[JP Difficulty Overlay] Matched ID:", itemId);
+
+  if (!itemId) {
+    console.log("[JP Difficulty Overlay] No match found in search index");
+    return null;
+  }
+
+  const item = mediaItems.find((item) => item.id === itemId) || null;
+  console.log("[JP Difficulty Overlay] Found item:", item?.canonicalTitle);
+  return item;
+}
+
+// ============================================================================
+// Title Extraction - Netflix
+// ============================================================================
+
+function extractNetflixTitle() {
+  // Netflix uses dynamic page titles. Try multiple strategies.
+
+  // Strategy 1: Page title from document.title
+  const documentTitle = document.title;
+  if (documentTitle && documentTitle !== "Netflix") {
+    // Remove common suffixes
+    const cleaned = documentTitle
+      .replace(/\s*[-–]\s*Netflix.*$/i, "")
+      .replace(/\s*\|\s*Netflix.*$/i, "");
+    if (cleaned && cleaned.length > 0) {
+      return cleaned;
+    }
+  }
+
+  // Strategy 2: Look for title in h1 elements
+  const h1Elements = document.querySelectorAll("h1");
+  for (const h1 of h1Elements) {
+    const text = h1.textContent?.trim();
+    if (text && text.length > 2 && text.length < 200) {
+      return text;
+    }
+  }
+
+  // Strategy 3: Look for role="heading" aria-level="1"
+  const mainHeading = document.querySelector('[role="heading"][aria-level="1"]');
+  if (mainHeading) {
+    const text = mainHeading.textContent?.trim();
+    if (text && text.length > 2) {
+      return text;
+    }
+  }
+
+  // Strategy 4: Look in main content area
+  const main = document.querySelector("main");
+  if (main) {
+    const headings = main.querySelectorAll("h1, h2");
+    for (const heading of headings) {
+      const text = heading.textContent?.trim();
+      if (text && text.length > 2 && text.length < 200) {
+        return text;
+      }
+    }
+  }
+
+  return null;
+}
+
+// ============================================================================
+// Title Extraction - Crunchyroll
+// ============================================================================
+
+function extractCrunchyrollTitle() {
+  // Crunchyroll uses dynamic titles. Try multiple strategies.
+
+  // Helper to clean title
+  const cleanTitle = (text) => {
+    if (!text) return text;
+    return text
+      .replace(/^(Watch|Stream|Play|Continue|Start|Read)\s+/i, "")
+      .replace(/\s+(Subbed|Dubbed|Sub|Dub|Series|Movie|OVA|on Crunchyroll)(\s|$)/i, "$2")
+      .trim();
+  };
+
+  // Strategy 1: Page title
+  const documentTitle = document.title;
+  if (documentTitle && documentTitle !== "Crunchyroll") {
+    let text = documentTitle
+      .replace(/\s*[-–]\s*Crunchyroll.*$/i, "")
+      .replace(/\s*\|\s*Crunchyroll.*$/i, "");
+    text = cleanTitle(text);
+    if (text && text.length > 2 && text.length < 200) {
+      return text;
+    }
+  }
+
+  // Strategy 2: h1 elements specifically (these usually have the series name)
+  const h1s = document.querySelectorAll("h1");
+  for (const h1 of h1s) {
+    let text = h1.textContent?.trim();
+    if (text && text.length > 2 && text.length < 200 && !text.includes("Crunchyroll")) {
+      text = cleanTitle(text);
+      if (text && text.length > 2) {
+        return text;
+      }
+    }
+  }
+
+  // Strategy 3: Look for title in common containers
+  const titleElements = document.querySelectorAll('[class*="title"], [class*="heading"], h2');
+  for (const element of titleElements) {
+    let text = element.textContent?.trim();
+    if (
+      text &&
+      text.length > 2 &&
+      text.length < 200 &&
+      !text.includes("Crunchyroll")
+    ) {
+      text = cleanTitle(text);
+      if (text && text.length > 2) {
+        return text;
+      }
+    }
+  }
+
+  // Strategy 4: Check for data attributes
+  const titleAttr = document.querySelector("[data-title], [data-series]");
+  if (titleAttr) {
+    const text =
+      titleAttr.getAttribute("data-title") ||
+      titleAttr.getAttribute("data-series");
+    if (text) return cleanTitle(text);
+  }
+
+  // Strategy 5: Fallback to main content
+  const main = document.querySelector("main, [role='main']");
+  if (main) {
+    const heading = main.querySelector("h1, h2");
+    if (heading) {
+      let text = heading.textContent?.trim();
+      if (text && text.length > 2) {
+        text = cleanTitle(text);
+        if (text && text.length > 2) {
+          return text;
+        }
+      }
+    }
+  }
+
+  return null;
+}
+
+// ============================================================================
+// Detect Title Based on Platform
+// ============================================================================
+
+function detectCurrentTitle() {
+  const platform = getPlatform();
+
+  if (platform === "netflix") {
+    return extractNetflixTitle();
+  }
+
+  if (platform === "crunchyroll") {
+    return extractCrunchyrollTitle();
+  }
+
+  return null;
+}
+
+// ============================================================================
+// Overlay Rendering
+// ============================================================================
+
+function createOverlayElement(item, detectedTitle) {
+  const container = document.createElement("div");
+  container.className = "jp-difficulty-overlay-container";
+
+  const overlay = document.createElement("div");
+  overlay.className = "jp-difficulty-overlay";
+
+  // Close button
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "jp-difficulty-close";
+  closeBtn.textContent = "×";
+  closeBtn.setAttribute("aria-label", "Close overlay");
+  closeBtn.addEventListener("click", () => {
+    container.remove();
+  });
+
+  // Title
+  const titleEl = document.createElement("h3");
+  titleEl.textContent = "日本語 Difficulty";
+
+  overlay.appendChild(closeBtn);
+  overlay.appendChild(titleEl);
+
+  // Detected title (small)
+  if (detectedTitle) {
+    const detectedEl = document.createElement("div");
+    detectedEl.className = "jp-difficulty-overlay-title";
+    detectedEl.textContent = `Detected: ${detectedTitle}`;
+    overlay.appendChild(detectedEl);
+  }
+
+  // LearnNatively rating
+  if (
+    item.ratings &&
+    item.ratings.learnnatively &&
+    item.ratings.learnnatively.level
+  ) {
+    const ln = item.ratings.learnnatively;
+    const ratingDiv = document.createElement("div");
+    ratingDiv.className = "jp-difficulty-rating";
+
+    const label = document.createElement("span");
+    label.className = "jp-difficulty-rating-label";
+    label.textContent = "LearnNatively:";
+
+    const value = document.createElement("span");
+    value.className = "jp-difficulty-rating-value";
+    value.textContent = ln.level;
+
+    ratingDiv.appendChild(label);
+    ratingDiv.appendChild(value);
+
+    if (ln.jlptApprox) {
+      const jlpt = document.createElement("span");
+      jlpt.className = "jp-difficulty-rating-jlpt";
+      jlpt.textContent = `/ ${ln.jlptApprox}`;
+      ratingDiv.appendChild(jlpt);
+    }
+
+    overlay.appendChild(ratingDiv);
+  }
+
+  // jpdb rating
+  if (
+    item.ratings &&
+    item.ratings.jpdb &&
+    item.ratings.jpdb.difficulty !== null &&
+    item.ratings.jpdb.difficulty !== undefined
+  ) {
+    const jpdb = item.ratings.jpdb;
+    const ratingDiv = document.createElement("div");
+    ratingDiv.className = "jp-difficulty-rating";
+
+    const label = document.createElement("span");
+    label.className = "jp-difficulty-rating-label";
+    label.textContent = "jpdb:";
+
+    const value = document.createElement("span");
+    value.className = "jp-difficulty-rating-value";
+    value.textContent = jpdb.difficulty;
+
+    ratingDiv.appendChild(label);
+    ratingDiv.appendChild(value);
+
+    overlay.appendChild(ratingDiv);
+  }
+
+  // Links
+  const linksDiv = document.createElement("div");
+  linksDiv.className = "jp-difficulty-links";
+
+  if (
+    item.ratings &&
+    item.ratings.learnnatively &&
+    item.ratings.learnnatively.url
+  ) {
+    const lnLink = document.createElement("a");
+    lnLink.className = "jp-difficulty-link";
+    lnLink.href = item.ratings.learnnatively.url;
+    lnLink.target = "_blank";
+    lnLink.rel = "noopener noreferrer";
+    lnLink.textContent = "LearnNatively";
+    linksDiv.appendChild(lnLink);
+  }
+
+  if (item.ratings && item.ratings.jpdb && item.ratings.jpdb.url) {
+    const jpdbLink = document.createElement("a");
+    jpdbLink.className = "jp-difficulty-link";
+    jpdbLink.href = item.ratings.jpdb.url;
+    jpdbLink.target = "_blank";
+    jpdbLink.rel = "noopener noreferrer";
+    jpdbLink.textContent = "jpdb";
+    linksDiv.appendChild(jpdbLink);
+  }
+
+  if (linksDiv.children.length > 0) {
+    overlay.appendChild(linksDiv);
+  }
+
+  container.appendChild(overlay);
+  return container;
+}
+
+function createUnmatchedOverlayElement(detectedTitle) {
+  const container = document.createElement("div");
+  container.className = "jp-difficulty-overlay-container";
+
+  const overlay = document.createElement("div");
+  overlay.className = "jp-difficulty-overlay unmatched";
+
+  // Close button
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "jp-difficulty-close";
+  closeBtn.textContent = "×";
+  closeBtn.setAttribute("aria-label", "Close overlay");
+  closeBtn.addEventListener("click", () => {
+    container.remove();
+  });
+
+  // Title
+  const titleEl = document.createElement("h3");
+  titleEl.textContent = "日本語 Difficulty";
+
+  overlay.appendChild(closeBtn);
+  overlay.appendChild(titleEl);
+
+  // No match message
+  const messageEl = document.createElement("div");
+  messageEl.style.marginBottom = "8px";
+  messageEl.style.fontSize = "12px";
+  messageEl.textContent = "No community rating found";
+  overlay.appendChild(messageEl);
+
+  // Detected title
+  if (detectedTitle) {
+    const detectedEl = document.createElement("div");
+    detectedEl.className = "jp-difficulty-unknown-title";
+    detectedEl.textContent = detectedTitle;
+    overlay.appendChild(detectedEl);
+  }
+
+  // Search links
+  const searchDiv = document.createElement("div");
+  searchDiv.className = "jp-difficulty-search-links";
+
+  const lnSearchLink = document.createElement("a");
+  lnSearchLink.className = "jp-difficulty-search-link";
+  lnSearchLink.href = "https://learnnatively.com/";
+  lnSearchLink.target = "_blank";
+  lnSearchLink.rel = "noopener noreferrer";
+  lnSearchLink.textContent = "Search LearnNatively";
+  searchDiv.appendChild(lnSearchLink);
+
+  const jpdbSearchLink = document.createElement("a");
+  jpdbSearchLink.className = "jp-difficulty-search-link";
+  jpdbSearchLink.href = "https://jpdb.io/";
+  jpdbSearchLink.target = "_blank";
+  jpdbSearchLink.rel = "noopener noreferrer";
+  jpdbSearchLink.textContent = "Search jpdb";
+  searchDiv.appendChild(jpdbSearchLink);
+
+  overlay.appendChild(searchDiv);
+
+  // Add local mapping button
+  const addMappingBtn = document.createElement("button");
+  addMappingBtn.className = "jp-difficulty-add-mapping";
+  addMappingBtn.textContent = "Add local mapping";
+  addMappingBtn.addEventListener("click", () => {
+    // Store the detected title in chrome.storage
+    chrome.storage.local.set({ pendingDetectedTitle: detectedTitle || "" }, () => {
+      // Open the options page in a new tab
+      try {
+        const optionsUrl = chrome.runtime.getURL("options.html");
+        window.open(optionsUrl, "_blank");
+      } catch (error) {
+        console.error("[JP Difficulty Overlay] Error opening options:", error);
+        alert("Could not open options page. Please open it manually from the extension menu.");
+      }
+    });
+  });
+
+  overlay.appendChild(addMappingBtn);
+
+  container.appendChild(overlay);
+  return container;
+}
+
+// ============================================================================
+// Update Overlay
+// ============================================================================
+
+function updateOverlay() {
+  const detectedTitle = detectCurrentTitle();
+
+  // Only update if title changed
+  if (detectedTitle === lastDetectedTitle) {
+    return;
+  }
+
+  lastDetectedTitle = detectedTitle;
+
+  // Remove old overlay
+  if (currentOverlayElement) {
+    currentOverlayElement.remove();
+    currentOverlayElement = null;
+  }
+
+  // Don't show overlay if no title detected
+  if (!detectedTitle) {
+    return;
+  }
+
+  // Find matching item
+  const item = findMediaItem(detectedTitle);
+
+  // Create and inject overlay
+  if (item) {
+    currentOverlayElement = createOverlayElement(item, detectedTitle);
+  } else {
+    currentOverlayElement = createUnmatchedOverlayElement(detectedTitle);
+  }
+
+  document.body.appendChild(currentOverlayElement);
+}
+
+// ============================================================================
+// Debounced Update
+// ============================================================================
+
+function scheduleUpdate() {
+  if (updateTimer) {
+    clearTimeout(updateTimer);
+  }
+
+  updateTimer = setTimeout(() => {
+    updateOverlay();
+    updateTimer = null;
+  }, 500);
+}
+
+// ============================================================================
+// URL Change Detection
+// ============================================================================
+
+function detectUrlChange() {
+  const currentUrl = location.href;
+
+  if (currentUrl !== lastUrl) {
+    lastUrl = currentUrl;
+    lastDetectedTitle = null;
+    scheduleUpdate();
+  }
+}
+
+// ============================================================================
+// DOM Mutation Observer
+// ============================================================================
+
+function setupMutationObserver() {
+  const observer = new MutationObserver(() => {
+    scheduleUpdate();
+  });
+
+  const config = {
+    childList: true,
+    subtree: true,
+    characterData: false,
+    attributes: false,
+  };
+
+  observer.observe(document.documentElement, config);
+}
+
+// ============================================================================
+// Initialization
+// ============================================================================
+
+async function initialize() {
+  try {
+    // Build search index
+    await buildSearchIndex();
+
+    // Initial overlay
+    updateOverlay();
+
+    // Setup observers
+    setupMutationObserver();
+
+    // Detect URL changes
+    setInterval(detectUrlChange, 1000);
+
+    console.log("[JP Difficulty Overlay] Initialized successfully");
+  } catch (error) {
+    console.error("[JP Difficulty Overlay] Initialization error:", error);
+  }
+}
+
+// Start when DOM is ready
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initialize);
+} else {
+  initialize();
+}

@@ -1,0 +1,26 @@
+{
+  "name": "jp-difficulty-overlay-tools",
+  "version": "0.1.0",
+  "description": "Tools for building and curating the JP Difficulty Overlay media database",
+  "main": "content.js",
+  "scripts": {
+    "fetch": "node tools/build-media-index.js --fetch",
+    "build": "node tools/csv-to-media-index.js tools/RATINGS_TEMPLATE.csv",
+    "validate": "node tools/build-media-index.js --validate",
+    "help": "node tools/build-media-index.js --help"
+  },
+  "keywords": [
+    "chrome-extension",
+    "japanese",
+    "anime",
+    "learning",
+    "difficulty",
+    "learnnatively",
+    "jpdb"
+  ],
+  "author": "JP Difficulty Overlay Community",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
