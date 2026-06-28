@@ -1,13 +1,25 @@
 {
   "name": "jp-difficulty-overlay-tools",
-  "version": "0.1.0",
-  "description": "Tools for building and curating the JP Difficulty Overlay media database",
+  "version": "1.0.0",
+  "description": "Tools for building and curating a 5000+ title JP Difficulty Overlay media database",
   "main": "content.js",
   "scripts": {
-    "fetch": "node tools/build-media-index.js --fetch",
-    "build": "node tools/csv-to-media-index.js tools/RATINGS_TEMPLATE.csv",
-    "validate": "node tools/build-media-index.js --validate",
-    "help": "node tools/build-media-index.js --help"
+    "download": "node tools/build-database.js --download-animedb",
+    "extract": "node tools/build-database.js --extract --limit 5000",
+    "extract:sample": "node tools/build-database.js --extract --limit 500",
+    "generate-batches": "node tools/generate-csv-batch.js --all",
+    "generate-batch:range": "node tools/generate-csv-batch.js --range",
+    "suggest-aliases": "node tools/suggest-aliases.js",
+    "track": "node tools/track-ratings.js --overview",
+    "track:gaps": "node tools/track-ratings.js --gaps",
+    "track:bytype": "node tools/track-ratings.js --by-type",
+    "validate:candidates": "node tools/validate-ratings.js --candidates",
+    "validate:csv": "node tools/validate-ratings.js --csv",
+    "merge": "node tools/build-database.js --merge",
+    "stats": "node tools/build-database.js --stats",
+    "enrich:sample": "node tools/enrich-anilist.js --sample 10",
+    "enrich:all": "node tools/enrich-anilist.js --all",
+    "help": "echo 'See tools/SCALING_GUIDE.md for complete workflow documentation'"
   },
   "keywords": [
     "chrome-extension",
@@ -16,11 +28,20 @@
     "learning",
     "difficulty",
     "learnnatively",
-    "jpdb"
+    "jpdb",
+    "database",
+    "scaling"
   ],
   "author": "JP Difficulty Overlay Community",
   "license": "MIT",
   "engines": {
     "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/jp-difficulty-overlay"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/jp-difficulty-overlay/issues"
   }
 }
