@@ -12,7 +12,7 @@ Output: media-index-merged.json (for the extension). Source files preserved.
 import json, re
 from pathlib import Path
 
-DATA_DIR = Path('d:/DifficultyRatings/jp-difficulty-overlay/data')
+DATA_DIR = Path(__file__).parent / 'data'
 
 def normalize(s):
     """Lowercase, strip special chars, collapse whitespace. Keeps Japanese chars."""
@@ -83,6 +83,7 @@ def main():
     with_both = 0
     ln_only = 0
     unified = []
+    unmatched_entries = []  # NEW: Track unmatched LN entries
     
     for ln_entry in ln_entries:
         ln_id = str(ln_entry.get('id', ''))
@@ -137,6 +138,15 @@ def main():
         
         if not matched_candidate:
             ln_only += 1
+            # NEW: Record unmatched entry
+            unmatched_entries.append({
+                "id": ln_id,
+                "title": ln_title,
+                "english": ln_english,
+                "type": ln_type,
+                "level": ln_lvl,
+                "url": ln_url,
+            })
         
         # Collect all unique title forms for searchability
         all_titles = list(titles_dict.values()) + [ln_title, ln_english]
@@ -185,12 +195,18 @@ def main():
     print(f"  Matched to candidate: {matched}")
     print(f"  With both ratings:    {with_both}")
     print(f"  LN only (no jpdb):    {ln_only}")
+    print(f"  Unmatched (no jpdb):  {len(unmatched_entries)}")
     print(f"  Total unified:        {len(unified)}")
     
-    # Save
+    # Save merged DB
     outfile = DATA_DIR / 'media-index-merged.json'
     with open(outfile, 'w', encoding='utf-8') as f:
         json.dump(unified, f, indent=2, ensure_ascii=False)
+    
+    # NEW: Save comprehensive report with unmatched samples
+    # Sort unmatched by level (highest first) for prioritization
+    unmatched_by_level = sorted(unmatched_entries, key=lambda x: x.get('level') or 0, reverse=True)
+    unmatched_samples = unmatched_by_level[:20]  # Top 20 hardest titles
     
     report = {
         'total_ln': len(ln_entries),
@@ -199,12 +215,33 @@ def main():
         'with_both_ratings': with_both,
         'ln_only_no_jpdb': ln_only,
         'total_unified': len(unified),
+        'total_unmatched': len(unmatched_entries),
+        'unmatched_samples': unmatched_samples,  # NEW: Top 20 for manual review
+        'unmatched_by_type': {},  # NEW: Breakdown by mediaType
     }
+    
+    # NEW: Count unmatched by type
+    for entry in unmatched_entries:
+        mtype = entry.get('type', 'unknown')
+        report['unmatched_by_type'][mtype] = report['unmatched_by_type'].get(mtype, 0) + 1
+    
     with open(DATA_DIR / 'merge-report.json', 'w', encoding='utf-8') as f:
         json.dump(report, f, indent=2)
     
     print(f"\nSaved: {outfile}")
     print(f"Saved: {DATA_DIR / 'merge-report.json'}")
+    
+    # NEW: Print unmatched summary
+    print("\nUnmatched samples (top 20 by difficulty level):")
+    for u in unmatched_samples:
+        level_str = f"L{u['level']}" if u['level'] is not None else "??"
+        title = (u['english'] or u['title'])[:50]
+        mtype = u['type'] or '?'
+        print(f"  [{level_str:>4}] [{mtype:>12}] {title}")
+    
+    print("\nUnmatched by type:")
+    for mtype, count in sorted(report['unmatched_by_type'].items(), key=lambda x: x[1], reverse=True):
+        print(f"  {mtype:20s}: {count:4d}")
     
     # Samples
     print("\nSample entries (first 5 with both ratings):")

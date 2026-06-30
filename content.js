@@ -352,13 +352,21 @@ function makeLink(text, className, url) {
   return a;
 }
 
-function buildSearchUrl(site, query) {
-  const q = encodeURIComponent(query);
-  if (site === "learnnatively") return `https://learnnatively.com/search/jpn/videos/?q=${q}`;
-  if (site === "jpdb") return `https://jpdb.io/search?q=${q}&lang=japanese`;
-  if (site === "google-ln") return `https://www.google.com/search?q=${q}+site%3Alearnnatively.com`;
-  if (site === "google-jpdb") return `https://www.google.com/search?q=${q}+site%3Ajpdb.io`;
-  return "#";
+// ===== Build fallback/search URLs =====
+function buildFallbackUrl(type, titleQ) {
+  switch (type) {
+    case 'search-learnnatively':
+      // Google search limited to learnnatively.com
+      return `https://www.google.com/search?q=site:learnnatively.com "${titleQ}"`;
+    case 'search-jpdb':
+      // Google search limited to jpdb.io
+      return `https://www.google.com/search?q=site:jpdb.io "${titleQ}"`;
+    case 'jpdb-anime-list':
+      // Direct link to jpdb's anime difficulty list
+      return 'https://jpdb.io/anime';
+    default:
+      return '#';
+  }
 }
 
 function createHybridOverlay(detectedTitle, item) {
@@ -451,27 +459,29 @@ function createHybridOverlay(detectedTitle, item) {
 
   const titleQ = detectedTitle || titleInput.value;
 
-  // Open source buttons (when URL available)
+  // LearnNatively Button (Source or Search)
   if (lnRating?.url) {
     actionsDiv.appendChild(makeLink("LearnNatively", "jp-difficulty-action-btn source", lnRating.url));
-  }
-  if (jpdbRating?.url) {
-    actionsDiv.appendChild(makeLink("jpdb", "jp-difficulty-action-btn source", jpdbRating.url));
+  } else {
+    const lnSearchUrl = buildFallbackUrl('search-learnnatively', encodeURIComponent(titleQ));
+    actionsDiv.appendChild(makeLink("🔍 Search LN", "jp-difficulty-action-btn search", lnSearchUrl));
   }
 
-  // Search buttons (always shown)
-  if (!lnRating?.url) {
-    actionsDiv.appendChild(makeLink("Search LN", "jp-difficulty-action-btn search", buildSearchUrl("learnnatively", titleQ)));
-  }
-  if (!jpdbRating?.url) {
-    actionsDiv.appendChild(makeLink("Search jpdb", "jp-difficulty-action-btn search", buildSearchUrl("jpdb", titleQ)));
+  // jpdb Button(s) (Source or Search)
+  if (jpdbRating?.url) {
+    actionsDiv.appendChild(makeLink("jpdb", "jp-difficulty-action-btn source", jpdbRating.url));
+  } else {
+    const jpdbSearchUrl = buildFallbackUrl('search-jpdb', encodeURIComponent(titleQ));
+    const jpdbListUrl = buildFallbackUrl('jpdb-anime-list', encodeURIComponent(titleQ));
+    actionsDiv.appendChild(makeLink("🔍 Search jpdb", "jp-difficulty-action-btn search", jpdbSearchUrl));
+    actionsDiv.appendChild(makeLink("📊 Anime List", "jp-difficulty-action-btn search", jpdbListUrl));
   }
 
   // Copy title button
-  const copyBtn = makeButton("Copy", "jp-difficulty-action-btn copy", () => {
+  const copyBtn = makeButton("📋 Copy", "jp-difficulty-action-btn copy", () => {
     navigator.clipboard.writeText(titleQ).catch(() => {});
     copyBtn.textContent = "✓ Copied!";
-    setTimeout(() => { copyBtn.textContent = "Copy"; }, 2000);
+    setTimeout(() => { copyBtn.textContent = "📋 Copy"; }, 2000);
   });
   actionsDiv.appendChild(copyBtn);
 
