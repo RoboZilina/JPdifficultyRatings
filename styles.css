@@ -187,6 +187,133 @@
   background: rgba(255, 255, 255, 0.3);
 }
 
+/* Editable title input */
+.jp-difficulty-input-group {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.jp-difficulty-title-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  outline: none;
+  min-width: 0;
+}
+
+.jp-difficulty-title-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.jp-difficulty-title-input:focus {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.jp-difficulty-refresh-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.jp-difficulty-refresh-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Found label */
+.jp-difficulty-found-label {
+  font-size: 11px;
+  opacity: 0.9;
+  margin-bottom: 6px;
+  word-break: break-word;
+}
+
+/* Missing rating */
+.jp-difficulty-rating.missing {
+  opacity: 0.6;
+}
+
+.jp-difficulty-rating-missing {
+  font-style: italic;
+  font-size: 11px;
+}
+
+/* Not found state */
+.jp-difficulty-not-found {
+  font-size: 11px;
+  opacity: 0.8;
+  margin: 8px 0;
+  font-style: italic;
+  word-break: break-word;
+}
+
+/* Action buttons row */
+.jp-difficulty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.jp-difficulty-action-btn {
+  flex: 1;
+  min-width: 60px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  padding: 5px 6px;
+  border-radius: 4px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.jp-difficulty-action-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.jp-difficulty-action-btn.source {
+  background: rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+}
+
+.jp-difficulty-action-btn.search {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.jp-difficulty-action-btn.copy {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.jp-difficulty-action-btn.copy:active {
+  background: rgba(100, 255, 100, 0.2);
+}
+
 /* Mobile responsiveness */
 @media (max-width: 480px) {
   .jp-difficulty-overlay-container {
