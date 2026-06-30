@@ -331,212 +331,151 @@ function detectCurrentTitle() {
 }
 
 // ============================================================================
-// Overlay Rendering
+// Overlay Rendering — Hybrid UI
 // ============================================================================
 
-function createOverlayElement(item, detectedTitle) {
-  const container = document.createElement("div");
-  container.className = "jp-difficulty-overlay-container";
-
-  const overlay = document.createElement("div");
-  overlay.className = "jp-difficulty-overlay";
-
-  // Close button
-  const closeBtn = document.createElement("button");
-  closeBtn.className = "jp-difficulty-close";
-  closeBtn.textContent = "×";
-  closeBtn.setAttribute("aria-label", "Close overlay");
-  closeBtn.addEventListener("click", () => {
-    container.remove();
-  });
-
-  // Title
-  const titleEl = document.createElement("h3");
-  titleEl.textContent = "日本語 Difficulty";
-
-  overlay.appendChild(closeBtn);
-  overlay.appendChild(titleEl);
-
-  // Detected title (small)
-  if (detectedTitle) {
-    const detectedEl = document.createElement("div");
-    detectedEl.className = "jp-difficulty-overlay-title";
-    detectedEl.textContent = `Detected: ${detectedTitle}`;
-    overlay.appendChild(detectedEl);
-  }
-
-  // LearnNatively rating
-  if (
-    item.ratings &&
-    item.ratings.learnnatively &&
-    item.ratings.learnnatively.level
-  ) {
-    const ln = item.ratings.learnnatively;
-    const ratingDiv = document.createElement("div");
-    ratingDiv.className = "jp-difficulty-rating";
-
-    const label = document.createElement("span");
-    label.className = "jp-difficulty-rating-label";
-    label.textContent = "LearnNatively:";
-
-    const value = document.createElement("span");
-    value.className = "jp-difficulty-rating-value";
-    value.textContent = ln.level;
-
-    ratingDiv.appendChild(label);
-    ratingDiv.appendChild(value);
-
-    if (ln.jlptApprox) {
-      const jlpt = document.createElement("span");
-      jlpt.className = "jp-difficulty-rating-jlpt";
-      jlpt.textContent = `/ ${ln.jlptApprox}`;
-      ratingDiv.appendChild(jlpt);
-    }
-
-    overlay.appendChild(ratingDiv);
-  }
-
-  // jpdb rating
-  if (
-    item.ratings &&
-    item.ratings.jpdb &&
-    item.ratings.jpdb.difficulty !== null &&
-    item.ratings.jpdb.difficulty !== undefined
-  ) {
-    const jpdb = item.ratings.jpdb;
-    const ratingDiv = document.createElement("div");
-    ratingDiv.className = "jp-difficulty-rating";
-
-    const label = document.createElement("span");
-    label.className = "jp-difficulty-rating-label";
-    label.textContent = "jpdb:";
-
-    const value = document.createElement("span");
-    value.className = "jp-difficulty-rating-value";
-    value.textContent = jpdb.difficulty;
-
-    ratingDiv.appendChild(label);
-    ratingDiv.appendChild(value);
-
-    overlay.appendChild(ratingDiv);
-  }
-
-  // Links
-  const linksDiv = document.createElement("div");
-  linksDiv.className = "jp-difficulty-links";
-
-  if (
-    item.ratings &&
-    item.ratings.learnnatively &&
-    item.ratings.learnnatively.url
-  ) {
-    const lnLink = document.createElement("a");
-    lnLink.className = "jp-difficulty-link";
-    lnLink.href = item.ratings.learnnatively.url;
-    lnLink.target = "_blank";
-    lnLink.rel = "noopener noreferrer";
-    lnLink.textContent = "LearnNatively";
-    linksDiv.appendChild(lnLink);
-  }
-
-  if (item.ratings && item.ratings.jpdb && item.ratings.jpdb.url) {
-    const jpdbLink = document.createElement("a");
-    jpdbLink.className = "jp-difficulty-link";
-    jpdbLink.href = item.ratings.jpdb.url;
-    jpdbLink.target = "_blank";
-    jpdbLink.rel = "noopener noreferrer";
-    jpdbLink.textContent = "jpdb";
-    linksDiv.appendChild(jpdbLink);
-  }
-
-  if (linksDiv.children.length > 0) {
-    overlay.appendChild(linksDiv);
-  }
-
-  container.appendChild(overlay);
-  return container;
+function makeButton(text, className, clickHandler) {
+  const btn = document.createElement("button");
+  btn.className = className;
+  btn.textContent = text;
+  if (clickHandler) btn.addEventListener("click", clickHandler);
+  return btn;
 }
 
-function createUnmatchedOverlayElement(detectedTitle) {
+function makeLink(text, className, url) {
+  const a = document.createElement("a");
+  a.className = className;
+  a.href = url;
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
+  a.textContent = text;
+  return a;
+}
+
+function buildSearchUrl(site, query) {
+  const q = encodeURIComponent(query);
+  if (site === "learnnatively") return `https://learnnatively.com/search/jpn/videos/?q=${q}`;
+  if (site === "jpdb") return `https://jpdb.io/search?q=${q}&lang=japanese`;
+  if (site === "google-ln") return `https://www.google.com/search?q=${q}+site%3Alearnnatively.com`;
+  if (site === "google-jpdb") return `https://www.google.com/search?q=${q}+site%3Ajpdb.io`;
+  return "#";
+}
+
+function createHybridOverlay(detectedTitle, item) {
   const container = document.createElement("div");
   container.className = "jp-difficulty-overlay-container";
 
   const overlay = document.createElement("div");
-  overlay.className = "jp-difficulty-overlay unmatched";
+  overlay.className = `jp-difficulty-overlay${item ? "" : " unmatched"}`;
 
   // Close button
   const closeBtn = document.createElement("button");
   closeBtn.className = "jp-difficulty-close";
   closeBtn.textContent = "×";
   closeBtn.setAttribute("aria-label", "Close overlay");
-  closeBtn.addEventListener("click", () => {
-    container.remove();
-  });
+  closeBtn.addEventListener("click", () => container.remove());
 
   // Title
   const titleEl = document.createElement("h3");
-  titleEl.textContent = "日本語 Difficulty";
+  titleEl.textContent = "JP Difficulty";
 
   overlay.appendChild(closeBtn);
   overlay.appendChild(titleEl);
 
-  // No match message
-  const messageEl = document.createElement("div");
-  messageEl.style.marginBottom = "8px";
-  messageEl.style.fontSize = "12px";
-  messageEl.textContent = "No community rating found";
-  overlay.appendChild(messageEl);
+  // Editable title input
+  const inputGroup = document.createElement("div");
+  inputGroup.className = "jp-difficulty-input-group";
 
-  // Detected title
-  if (detectedTitle) {
-    const detectedEl = document.createElement("div");
-    detectedEl.className = "jp-difficulty-unknown-title";
-    detectedEl.textContent = detectedTitle;
-    overlay.appendChild(detectedEl);
-  }
+  const titleInput = document.createElement("input");
+  titleInput.type = "text";
+  titleInput.className = "jp-difficulty-title-input";
+  titleInput.value = detectedTitle || "";
+  titleInput.placeholder = "Title or search query...";
 
-  // Search links
-  const searchDiv = document.createElement("div");
-  searchDiv.className = "jp-difficulty-search-links";
-
-  const lnSearchLink = document.createElement("a");
-  lnSearchLink.className = "jp-difficulty-search-link";
-  lnSearchLink.href = "https://learnnatively.com/";
-  lnSearchLink.target = "_blank";
-  lnSearchLink.rel = "noopener noreferrer";
-  lnSearchLink.textContent = "Search LearnNatively";
-  searchDiv.appendChild(lnSearchLink);
-
-  const jpdbSearchLink = document.createElement("a");
-  jpdbSearchLink.className = "jp-difficulty-search-link";
-  jpdbSearchLink.href = "https://jpdb.io/";
-  jpdbSearchLink.target = "_blank";
-  jpdbSearchLink.rel = "noopener noreferrer";
-  jpdbSearchLink.textContent = "Search jpdb";
-  searchDiv.appendChild(jpdbSearchLink);
-
-  overlay.appendChild(searchDiv);
-
-  // Add local mapping button
-  const addMappingBtn = document.createElement("button");
-  addMappingBtn.className = "jp-difficulty-add-mapping";
-  addMappingBtn.textContent = "Add local mapping";
-  addMappingBtn.addEventListener("click", () => {
-    // Store the detected title in chrome.storage
-    chrome.storage.local.set({ pendingDetectedTitle: detectedTitle || "" }, () => {
-      // Open the options page in a new tab
-      try {
-        const optionsUrl = chrome.runtime.getURL("options.html");
-        window.open(optionsUrl, "_blank");
-      } catch (error) {
-        console.error("[JP Difficulty Overlay] Error opening options:", error);
-        alert("Could not open options page. Please open it manually from the extension menu.");
-      }
-    });
+  const refreshBtn = makeButton("↻", "jp-difficulty-refresh-btn", () => {
+    lastDetectedTitle = null;
+    updateOverlayWithTitle(titleInput.value.trim());
   });
 
-  overlay.appendChild(addMappingBtn);
+  inputGroup.appendChild(titleInput);
+  inputGroup.appendChild(refreshBtn);
+  overlay.appendChild(inputGroup);
 
+  const lnRating = item?.ratings?.learnnatively;
+  const jpdbRating = item?.ratings?.jpdb;
+  const titleForLookup = detectedTitle || titleInput.value;
+
+  if (item) {
+    // === Found: show ratings ===
+    const foundEl = document.createElement("div");
+    foundEl.className = "jp-difficulty-found-label";
+    foundEl.textContent = `Detected: ${item.canonicalTitle || titleForLookup}`;
+    overlay.appendChild(foundEl);
+
+    // LearnNatively rating
+    if (lnRating && lnRating.level != null) {
+      const row = document.createElement("div");
+      row.className = "jp-difficulty-rating";
+      row.innerHTML = `<span class="jp-difficulty-rating-label">LearnNatively:</span> <span class="jp-difficulty-rating-value">L${lnRating.level}</span>`;
+      overlay.appendChild(row);
+    } else {
+      const row = document.createElement("div");
+      row.className = "jp-difficulty-rating missing";
+      row.innerHTML = `<span class="jp-difficulty-rating-label">LearnNatively:</span> <span class="jp-difficulty-rating-missing">not found</span>`;
+      overlay.appendChild(row);
+    }
+
+    // jpdb rating
+    if (jpdbRating && jpdbRating.difficulty != null) {
+      const row = document.createElement("div");
+      row.className = "jp-difficulty-rating";
+      row.innerHTML = `<span class="jp-difficulty-rating-label">jpdb:</span> <span class="jp-difficulty-rating-value">${jpdbRating.difficulty} / 100</span>`;
+      overlay.appendChild(row);
+    } else {
+      const row = document.createElement("div");
+      row.className = "jp-difficulty-rating missing";
+      row.innerHTML = `<span class="jp-difficulty-rating-label">jpdb:</span> <span class="jp-difficulty-rating-missing">not found</span>`;
+      overlay.appendChild(row);
+    }
+  } else {
+    // === Not found: show guidance ===
+    const notFoundEl = document.createElement("div");
+    notFoundEl.className = "jp-difficulty-not-found";
+    notFoundEl.textContent = "No rating found in local lists.";
+    overlay.appendChild(notFoundEl);
+  }
+
+  // === Action buttons row ===
+  const actionsDiv = document.createElement("div");
+  actionsDiv.className = "jp-difficulty-actions";
+
+  const titleQ = detectedTitle || titleInput.value;
+
+  // Open source buttons (when URL available)
+  if (lnRating?.url) {
+    actionsDiv.appendChild(makeLink("LearnNatively", "jp-difficulty-action-btn source", lnRating.url));
+  }
+  if (jpdbRating?.url) {
+    actionsDiv.appendChild(makeLink("jpdb", "jp-difficulty-action-btn source", jpdbRating.url));
+  }
+
+  // Search buttons (always shown)
+  if (!lnRating?.url) {
+    actionsDiv.appendChild(makeLink("Search LN", "jp-difficulty-action-btn search", buildSearchUrl("learnnatively", titleQ)));
+  }
+  if (!jpdbRating?.url) {
+    actionsDiv.appendChild(makeLink("Search jpdb", "jp-difficulty-action-btn search", buildSearchUrl("jpdb", titleQ)));
+  }
+
+  // Copy title button
+  const copyBtn = makeButton("Copy", "jp-difficulty-action-btn copy", () => {
+    navigator.clipboard.writeText(titleQ).catch(() => {});
+    copyBtn.textContent = "✓ Copied!";
+    setTimeout(() => { copyBtn.textContent = "Copy"; }, 2000);
+  });
+  actionsDiv.appendChild(copyBtn);
+
+  overlay.appendChild(actionsDiv);
   container.appendChild(overlay);
   return container;
 }
@@ -570,11 +509,27 @@ function updateOverlay() {
   const item = findMediaItem(detectedTitle);
 
   // Create and inject overlay
-  if (item) {
-    currentOverlayElement = createOverlayElement(item, detectedTitle);
-  } else {
-    currentOverlayElement = createUnmatchedOverlayElement(detectedTitle);
+  currentOverlayElement = createHybridOverlay(detectedTitle, item);
+
+  document.body.appendChild(currentOverlayElement);
+}
+
+// ============================================================================
+// Update Overlay With Custom Title (from editable input)
+// ============================================================================
+
+function updateOverlayWithTitle(title) {
+  // Remove old overlay
+  if (currentOverlayElement) {
+    currentOverlayElement.remove();
+    currentOverlayElement = null;
   }
+
+  // Find matching item
+  const item = findMediaItem(title);
+
+  // Create and inject overlay
+  currentOverlayElement = createHybridOverlay(title, item);
 
   document.body.appendChild(currentOverlayElement);
 }
