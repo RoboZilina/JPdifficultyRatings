@@ -12,7 +12,7 @@ Output: media-index-merged.json (for the extension). Source files preserved.
 import json, re
 from pathlib import Path
 
-DATA_DIR = Path(__file__).parent / 'data'
+DATA_DIR = Path(__file__).parent.parent / 'data'
 
 def normalize(s):
     """Lowercase, strip special chars, collapse whitespace. Keeps Japanese chars."""
@@ -110,16 +110,12 @@ def main():
                 matched_candidate = candidates[matched_idx]
                 break
         
-        titles_dict = {'en': '', 'jp': '', 'romaji': ''}
-        aliases = []
-        jpdb_score = None
-        candidate_id = None
-        
         if matched_candidate:
+            # Matched to anime-offline-database: use candidate titles
             c = matched_candidate
             titles_dict = {
                 'en': c.get('titles', {}).get('en', '') if isinstance(c.get('titles'), dict) else '',
-                'jp': c.get('titles', {}).get('ja_jp', '') or c.get('titles', {}).get('ja', '') or '',
+                'ja': c.get('titles', {}).get('ja_jp', '') or c.get('titles', {}).get('ja', '') or '',
                 'romaji': c.get('titles', {}).get('romaji', '') if isinstance(c.get('titles'), dict) else '',
             }
             aliases = c.get('aliases', []) or []
@@ -135,10 +131,18 @@ def main():
             matched += 1
             if ln_lvl is not None:
                 with_both += 1
-        
-        if not matched_candidate:
+        else:
+            # Not matched to candidate - build titles from LN data
+            titles_dict = {
+                'en': ln_english or '',
+                'ja': ln_title or '',
+                'romaji': '',
+            }
+            aliases = []
+            jpdb_score = None
+            candidate_id = None
             ln_only += 1
-            # NEW: Record unmatched entry
+            # Track unmatched entries
             unmatched_entries.append({
                 "id": ln_id,
                 "title": ln_title,
@@ -153,15 +157,14 @@ def main():
         all_titles = [t for t in all_titles if t]
         if aliases:
             all_titles.extend(aliases)
-        
         entry_id = f'ln-{ln_id}'
         if candidate_id:
             entry_id = f'ao-{candidate_id}'
         
         # Build aliases list: all unique title forms
-        canonical = titles_dict['en'] or ln_english or titles_dict['romaji'] or titles_dict['jp'] or ''
+        canonical = titles_dict['en'] or titles_dict['ja'] or titles_dict['romaji'] or ''
         aliases_set = set()
-        for t in [titles_dict['en'], titles_dict['jp'], titles_dict['romaji'], ln_title, ln_english]:
+        for t in [titles_dict['en'], titles_dict['ja'], titles_dict['romaji'], ln_title, ln_english]:
             if t and t != canonical:
                 aliases_set.add(t)
         for a in aliases:
