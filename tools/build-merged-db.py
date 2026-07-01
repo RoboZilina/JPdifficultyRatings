@@ -28,7 +28,8 @@ def title_variants(title):
     if not title: return variants
     variants.add(title)
     variants.add(normalize(title))
-    cleaned = re.sub(r'\s*(?:Season|S\d+|Part|Vol|Volume)[.\s]*\d+.*$', '', title, flags=re.IGNORECASE).strip()
+    cleaned = re.sub(r'\s*S\d+\s*$', '', title, flags=re.IGNORECASE).strip()
+    cleaned = re.sub(r'\s*(?:Season|Part|Vol|Volume)[.\s]*\d+.*$', '', cleaned, flags=re.IGNORECASE).strip()
     if cleaned != title and cleaned:
         variants.add(normalize(cleaned))
     cleaned2 = re.sub(r'\s*\([^)]*\)\s*', '', title).strip()
@@ -204,10 +205,14 @@ def main():
         if candidate_id:
             entry_id = f'ao-{candidate_id}'
         
-        # Build aliases list: all unique title forms
-        canonical = titles_dict['en'] or titles_dict['ja'] or titles_dict['romaji'] or ''
+        # Build canonical title (prefer English title from matched candidate)
+        ct_en = titles_dict['en'] or ''
+        ct_ja = titles_dict['ja'] or ''
+        ct_rom = titles_dict['romaji'] or ''
+        canonical = ct_en or ct_ja or ct_rom or ln_english or ln_title or ''
         aliases_set = set()
-        for t in [titles_dict['en'], titles_dict['ja'], titles_dict['romaji'], ln_title, ln_english]:
+        # LT title and English title go to aliases if they differ from canonical
+        for t in [ct_ja, ct_rom, ct_en, ln_title, ln_english]:
             if t and t != canonical:
                 aliases_set.add(t)
         for a in aliases:
@@ -280,56 +285,12 @@ def main():
         })
         jpdb_only += 1
     
-    # Enrich all entries with alternative titles from candidates
-    # Index ALL candidate title forms → candidate metadata
-    enrich_idx = {}
-    for c in candidates:
-        cid = c.get('id', '')
-        if not cid: continue
-        titles = c.get('titles', {})
-        en = titles.get('en', '') if isinstance(titles, dict) else ''
-        ja = titles.get('ja_jp', '') or titles.get('ja', '') or '' if isinstance(titles, dict) else ''
-        rom = titles.get('romaji', '') if isinstance(titles, dict) else ''
-        aliases = c.get('aliases', []) or []
-        meta = {'en': en, 'ja': ja, 'romaji': rom, 'aliases': aliases}
-        # Index by all title forms for maximal matching
-        for title in [c.get('canonicalTitle',''), en, ja, rom] + aliases:
-            if title:
-                n = normalize(title)
-                if n and n not in enrich_idx:
-                    enrich_idx[n] = meta
-    
-    enriched = 0
-    for entry in unified:
-        n = normalize(entry.get('canonicalTitle', ''))
-        found = enrich_idx.get(n)
-        # Also try the LN Japanese title if available
-        if not found:
-            for alias in entry.get('aliases', []):
-                an = normalize(alias)
-                if an and an in enrich_idx:
-                    found = enrich_idx[an]
-                    break
-        
-        if found:
-            existing = set(entry.get('aliases', []))
-            for t in [found['ja'], found['romaji'], found['en']]:
-                if t and t != entry['canonicalTitle'] and t not in existing:
-                    existing.add(t)
-                    enriched += 1
-            for a in found['aliases']:
-                if a and a != entry['canonicalTitle'] and a not in existing:
-                    existing.add(a)
-                    enriched += 1
-            entry['aliases'] = sorted(existing)
-    
     print(f"\nResults:")
     print(f"  Total LN entries:       {len(ln_entries)}")
     print(f"  Matched to candidate:   {matched}")
     print(f"  With both ratings:      {with_both}")
     print(f"  LN only (no jpdb):      {ln_only}")
     print(f"  Total unified:          {len(unified)}")
-    print(f"  Aliases enriched:       {enriched}")
     
     # Save merged DB
     outfile = DATA_DIR / 'media-index-merged.json'
