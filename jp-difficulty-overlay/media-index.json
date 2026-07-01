@@ -10049,21 +10049,11 @@
     "id": "ao-mellow",
     "canonicalTitle": "Mellow",
     "aliases": [
-      "Littleforestfellow",
-      "Littleforestmello",
       "Mero",
-      "littleforestfellow",
-      "littleforestmelo",
-      "mello",
       "mellow",
-      "melo",
       "mero",
       "merou",
-      "my melody",
-      "sanrio",
       "めろう",
-      "リトルフォレストフェロォ",
-      "リトルフォレストフェロォ（めろぉ）",
       "女郎",
       "女郎 [めろう]",
       "女郎 [めろう] 女郎 mellow",
@@ -10801,24 +10791,8 @@
     "id": "ao-kase-san-and-morning-glories",
     "canonicalTitle": "Kase-san and Morning Glories",
     "aliases": [
-      "Asagao to Kase-san.",
-      "asagao to kase-san",
       "asagao to kase-san.",
-      "asagao to kase-san. (ova)",
-      "atk",
-      "kase-san & morning glories",
-      "kase-san and morning glories",
-      "kase-san and morning glories (ova)",
-      "kase-san and morning glories.",
-      "kase-san und blaue blumen",
-      "morning glory and kase-san",
-      "คุณคาเซะกับดอกบานเช้า",
-      "あさがおと加瀬さん.",
-      "あさがおと加瀬さん。",
-      "あさがおと加瀬さん。(2018)",
-      "牵牛花与加濑同学。",
-      "牽牛花與加瀨同學",
-      "나팔꽃과 카세씨"
+      "あさがおと加瀬さん。"
     ],
     "ratings": {
       "learnnatively": {
@@ -17947,25 +17921,11 @@
     "id": "ao-tsugumomo",
     "canonicalTitle": "Tsugumomo",
     "aliases": [
-      "Tsugu Tsugumomo",
-      "tsugumomo",
-      "tsugumomo 2",
-      "tsugumomo s2",
-      "tsugumomo2",
-      "tsugumomo: season 2",
-      "tsugumomo: staffel 2",
       "цугумомо",
       "สึกุโมโมะ ภูตสาวแสบดุ",
-      "สึกุโมโมะ ภูตสาวแสบดุ ภาค 2",
       "つぐもも",
       "つぐもも ",
       "怪怪守护神",
-      "継つぐもも",
-      "続つぐもも",
-      "続・つぐもも",
-      "繼怪怪守護神",
-      "继怪怪守护神",
-      "계 츠구모모",
       "츠구모모"
     ],
     "ratings": {
@@ -18331,12 +18291,33 @@
     }
   },
   {
-    "id": "ao-the-girl-from-the-other-side-siúil-a-rún",
-    "canonicalTitle": "The Girl from the Other Side: Siúil, a Rún",
+    "id": "ao-totsukuni-no-shoujo",
+    "canonicalTitle": "Totsukuni no Shoujo",
     "aliases": [
+      "A Menina do Outro Lado",
       "The Girl from the Other Side",
+      "a menina do outro lado",
+      "a run",
+      "a rún",
+      "das fremde mädchen",
+      "foreign girl",
+      "foreign girl oad",
+      "l`enfant et le maudit",
+      "la pequeña forastera: siúil, a rún",
+      "the girl from the other side",
+      "the girl from the other side: siuil",
+      "the girl from the other side: siuil, a run",
+      "the girl from the other side: siuil, a run ova",
+      "the girl from the other side: siúil",
+      "the girl from the other side: siúil, a rún",
+      "the girl from the other side: siúil, a rún oad",
+      "totsukuni no shoujo oad",
+      "totsukuni no shoujo ova",
       "totsukuni no shōjo",
-      "とつくにの少女"
+      "とつきにの少女",
+      "とつきにの少女oad",
+      "とつくにの少女",
+      "外之国的少女"
     ],
     "ratings": {
       "learnnatively": {
@@ -18350,12 +18331,33 @@
     }
   },
   {
-    "id": "ao-the-girl-from-the-other-side-siúil-a-rún",
-    "canonicalTitle": "The Girl from the Other Side: Siúil, a Rún",
+    "id": "ao-totsukuni-no-shoujo",
+    "canonicalTitle": "Totsukuni no Shoujo",
     "aliases": [
+      "A Menina do Outro Lado",
       "The Girl from the Other Side",
+      "a menina do outro lado",
+      "a run",
+      "a rún",
+      "das fremde mädchen",
+      "foreign girl",
+      "foreign girl oad",
+      "l`enfant et le maudit",
+      "la pequeña forastera: siúil, a rún",
+      "the girl from the other side",
+      "the girl from the other side: siuil",
+      "the girl from the other side: siuil, a run",
+      "the girl from the other side: siuil, a run ova",
+      "the girl from the other side: siúil",
+      "the girl from the other side: siúil, a rún",
+      "the girl from the other side: siúil, a rún oad",
+      "totsukuni no shoujo oad",
+      "totsukuni no shoujo ova",
       "totsukuni no shōjo",
-      "とつくにの少女"
+      "とつきにの少女",
+      "とつきにの少女oad",
+      "とつくにの少女",
+      "外之国的少女"
     ],
     "ratings": {
       "learnnatively": {
@@ -19439,29 +19441,18 @@
     }
   },
   {
-    "id": "ao-hataraku-saibou",
-    "canonicalTitle": "Hataraku Saibou",
+    "id": "ao-tmdb-movie-1303162",
+    "canonicalTitle": "Cells at Work!",
     "aliases": [
-      "Cells at Work!",
-      "Lavori in corpo",
-      "caw s1",
-      "cells at work!",
-      "cells at work! lavori in corpo",
-      "cells at work! tv",
-      "cells at work!!",
-      "células no trabalho",
-      "hataraku saibou (2018)",
+      "hataraku saibou",
       "hataraku saibō",
-      "hataraku saibō (2018)",
-      "lavori in corpo",
-      "les brigades immunitaires",
-      "клетки за работой!",
-      "الخلايا العاملة",
-      "เซลล์ขยัน พันธุ์เดือด",
+      "เซลล์ขยันพันธุ์เดือด",
       "はたらく細胞",
-      "はたらく細胞 （2018）",
+      "はたらく細胞 実写版",
+      "工作細胞",
       "工作细胞",
-      "일하는 세포"
+      "工作细胞 真人版",
+      "映画 はたらく細胞"
     ],
     "ratings": {
       "learnnatively": {
@@ -19469,8 +19460,8 @@
         "url": "https://learnnatively.com/movie/6144ce1b65/"
       },
       "jpdb": {
-        "difficulty": 46,
-        "url": "https://jpdb.io/anime/840/hataraku-saibou/stats"
+        "difficulty": null,
+        "url": null
       }
     }
   },
@@ -35059,14 +35050,14 @@
     }
   },
   {
-    "id": "ao-strike-witches-operation-victory-arrow-vol-2-aegean-umi-no-megami",
-    "canonicalTitle": "Strike Witches Operation Victory Arrow Vol. 2: Aegean Umi no Megami",
+    "id": "ao-strike-witches-operation-victory-arrow-vol-1-st-trond-no-raimei",
+    "canonicalTitle": "Strike Witches Operation Victory Arrow Vol. 1: St. Trond no Raimei",
     "aliases": [
       "Strike Witches: Operation Victory Arrow Vol.2 - The Goddess of the Aegean Sea",
-      "strike witches operation victory arrow vol. 2: goddess of the aegean sea",
-      "ストライクウィッチーズ Operation Victory Arrow vol.2　エーゲ海の女神",
-      "ストライクウィッチーズ operation victory arrow vol.2 エーゲ海の女神",
-      "ストライクウィッチーズ operation victory arrow vol.2　エーゲ海の女神"
+      "strike witches operation victory arrow vol. 1: saint trond's thunder",
+      "ストライクウィッチーズ Operation Victory Arrow vol.1　サン・トロンの雷鳴",
+      "ストライクウィッチーズ operation victory arrow vol.1　サン・トロンの雷鳴",
+      "ストライクウィッチーズ operation victory arrow vol.2 エーゲ海の女神"
     ],
     "ratings": {
       "learnnatively": {
@@ -35157,26 +35148,11 @@
     "id": "ao-strange",
     "canonicalTitle": "Strange+",
     "aliases": [
-      "Shin Strange Plus",
-      "Shin Strange+",
       "Strange Plus",
-      "shin strange plus",
-      "sin strange plus",
-      "sin strange+",
       "strange plus",
-      "strange plus 2",
-      "strange plus second season",
       "strange+",
-      "strange+ 2",
-      "strange+ 2nd season",
-      "strange+ season 2",
-      "strange+ staffel 2",
       "ストレンジ・プラス",
-      "ストレンジ・プラス ",
-      "ストレンジ・プラス 2",
-      "真 ストレンジ・プラス",
-      "真　ストレンジ・プラス",
-      "真ストレンジ・プラス"
+      "ストレンジ・プラス "
     ],
     "ratings": {
       "learnnatively": {
@@ -41106,9 +41082,7 @@
     "id": "ao-haikyuu-lev-genzan",
     "canonicalTitle": "Haikyuu!! Lev Genzan!",
     "aliases": [
-      "Haikyu!! OADs",
       "Haikyu!!: Lev Appears!",
-      "Haikyuu OVAs",
       "haikyu!!",
       "haikyu!! lev apears!",
       "haikyu!! lev est dans la place !",
@@ -41120,11 +41094,8 @@
       "haikyu!!: lev appears!",
       "haikyu!!: lev genzan!",
       "haikyu!!: lev ist hier!",
-      "haikyuu ovas",
-      "haikyuu!! (2014)",
       "haikyuu!! jump festa 2014 special",
       "haikyuu!! jump special anime festa 2014",
-      "haikyuu!! lev genzan!",
       "haikyuu!! lev kenzan!",
       "haikyuu!! ova",
       "haikyuu!! the arrival of haiba lev",
@@ -41136,9 +41107,7 @@
       "haikyuu!!: vs. akaten",
       "haikyu‼ oad: lev appears!",
       "haikyū!! lev kenzan!",
-      "волейбол ova-1",
       "ハイキュー!!",
-      "ハイキュー!! (2014)",
       "ハイキュー!! リエーフ見参！",
       "ハイキュー！！ リエーフ見参！"
     ],
@@ -54239,12 +54208,9 @@
     "canonicalTitle": "Nanatsu no Taizai",
     "aliases": [
       "7ds",
-      "Hawk no Onayami Soudanshitsu",
       "I Sette Peccati Capitali",
       "a hét főbűnös",
-      "hawk's trouble consultation room",
       "i sette peccati capitali",
-      "nanatsu no taizai",
       "sds",
       "sedam smrtnih grijeha",
       "sedm smrtelných hříchů",
@@ -54260,7 +54226,6 @@
       "الخطايا السبع المميتة",
       "सात खतरनाक पाप",
       "ศึกตำนาน 7 อัศวิน",
-      "ホークのお悩み相談室",
       "七つの大罪",
       "七つの大罪 ",
       "七つの大罪 the seven deadly sins",
@@ -55300,19 +55265,15 @@
     "canonicalTitle": "Kazemakase Tsukikage Ran",
     "aliases": [
       "Carried by the Wind",
-      "Carried by the Wind: Tsukikage Ran",
       "Ran",
       "carried by the wind",
       "carried by the wind: tsukikage ran",
-      "kazemakase tsukikage ran",
       "ktr",
       "la chica samurai",
       "ran",
       "ran the samurai girl",
       "ran, the samurai girl",
-      "samurai girl ran",
       "the samurai girl",
-      "tsukikage ran - carried by the wind",
       "wind-borne moon-lit ran",
       "перекати-поле цукикагэ ран",
       "乱",
@@ -64405,29 +64366,20 @@
     }
   },
   {
-    "id": "ao-ufo-princess-valkyrie-4-toki-to-yume-to-ginga-no-utage",
-    "canonicalTitle": "UFO Princess Valkyrie 4: Toki to Yume to Ginga no Utage",
+    "id": "ao-yume-sora-takaku",
+    "canonicalTitle": "Yume, Sora Takaku",
     "aliases": [
       "Dreams",
-      "and galaxies",
-      "dreams",
-      "ufo princess valkyrie 4",
-      "ufo princess valkyrie: toki to yume to ginga no utage",
-      "ufo princess walkure 4",
-      "ufo princess walkure happy party paradise",
-      "ufo princess walküre 4",
-      "ufo princess walküre: toki to yume to ginga no utage",
-      "ufo princess warukyure: toki to yume to ginga no utage",
-      "ufo ultramaiden valkyrie 4: banquet of time",
-      "ufo ultramaiden valkyrie 4: banquet of time, dreams, and galaxies",
-      "ufo ultramaiden valkyrie: season 4",
-      "ufo4",
-      "ufopw4",
-      "неземная принцесса валькирия 4",
-      "เทวดาท่าจะป่วน",
-      "円盤皇女ワるきゅーレ 時と夢と銀河の宴",
-      "圓盤皇女-時空與夢想的銀河之宴",
-      "夢"
+      "Sora Takaku",
+      "dream, high in the sky",
+      "sora takaku",
+      "yume",
+      "yume, soratakaku",
+      "夢",
+      "夢, 空高く",
+      "夢、 空高く",
+      "夢、空高く",
+      "空高く"
     ],
     "ratings": {
       "learnnatively": {
@@ -87466,11 +87418,11 @@
     }
   },
   {
-    "id": "ao-the-great-passage",
-    "canonicalTitle": "The Great Passage",
+    "id": "ao-fune-wo-amu",
+    "canonicalTitle": "Fune wo Amu",
     "aliases": [
       "Barca de Palavras",
-      "Fune wo Amu",
+      "The Great Passage",
       "barca de palavras",
       "compiling a ship",
       "el gran pasaje",
@@ -87492,8 +87444,8 @@
         "url": "https://learnnatively.com/movie/2417024715/"
       },
       "jpdb": {
-        "difficulty": null,
-        "url": null
+        "difficulty": 32,
+        "url": "https://jpdb.io/anime/494/fune-wo-amu/stats"
       }
     }
   },
@@ -97507,7 +97459,6 @@
     "id": "ao-akebi-chan-no-sailor-fuku",
     "canonicalTitle": "Akebi-chan no Sailor-fuku",
     "aliases": [
-      "Akebi's Sailor Uniform",
       "akebi",
       "akebi's sailor uniform",
       "akebi's school uniform",
@@ -98573,7 +98524,6 @@
     "id": "ao-baki-dai-raitaisai-hen",
     "canonicalTitle": "Baki: Dai Raitaisai-hen",
     "aliases": [
-      "Baki",
       "baki (2020)",
       "baki 2nd season",
       "baki : la saga du grand tournoi de raitai",
@@ -98581,7 +98531,6 @@
       "baki season 4",
       "baki. saga wielkiego turnieju raitai",
       "baki: dai raitaisai hen",
-      "baki: dai raitaisai-hen",
       "baki: die saga vom raitai-turnier",
       "baki: la saga del gran torneo de raitai",
       "baki: la saga del grande torneo raitai",
@@ -98972,27 +98921,16 @@
     "canonicalTitle": "Beastars Final Season Part 2",
     "aliases": [
       "BEASTARS (新章)",
-      "BEASTARS FINAL SEASON",
-      "Beastars Final Season",
       "beastars (新章)",
       "beastars dernière saison (partie 2)",
-      "beastars final season",
       "beastars final season (part 2)",
-      "beastars final season part 1",
       "beastars final season part 2",
       "beastars final season: part ii",
-      "beastars letzte staffel",
       "beastars letzte staffel (teil 2)",
-      "beastars new season",
-      "beastars season 3",
       "beastars season 3 part 2",
-      "beastars stagione finale",
       "beastars stagione finale (parte 2)",
-      "beastars temporada final",
       "beastars temporada final (parte 2)",
-      "beastars: final season",
       "beastars: final season (part 2)",
-      "beastars: sezon finałowy",
       "beastars: sezon finałowy, część 2",
       "ビースターズ"
     ],
@@ -100959,7 +100897,6 @@
     "canonicalTitle": "Cardcaptor Sakura: Clear Card-hen",
     "aliases": [
       "CCSCC",
-      "Cardcaptor Sakura: Clear Card",
       "card captor sakura: clear card arc",
       "cardcaptor sakura clear card",
       "cardcaptor sakura: clear card",
@@ -100989,14 +100926,11 @@
     "canonicalTitle": "Cardcaptor Sakura: Clear Card-hen Prologue - Sakura to Futatsu no Kuma",
     "aliases": [
       "CCS OVA",
-      "Cardcaptor Sakura: Clear Card Prologue",
-      "Sakura to Futatsu no Kuma",
       "card captor sakura: clear card chapter ova - sakura y los dos osos",
       "cardcaptor sakura clear card - prologo: i due orsi",
       "cardcaptor sakura: clear card - sakura e os dois ursos",
       "cardcaptor sakura: clear card - sakura y los dos osos",
       "cardcaptor sakura: clear card arc - sakura and the two teddy bears",
-      "cardcaptor sakura: clear card arc prologue: sakura and the two bears",
       "cardcaptor sakura: clear card hen - prologue - sakura to futatsu no kuma",
       "cardcaptor sakura: clear card prolog - sakura und die zwei teddys",
       "cardcaptor sakura: clear card prologo - sakura e i due orsi",
@@ -101005,10 +100939,8 @@
       "cardcaptor sakura: clear card prologue – sakura and the two bears",
       "cardcaptor sakura: clear card-hen - prologue sakura to futatsu no kuma",
       "cardcaptor sakura: clear card-hen - sakura to futatsu no kuma",
-      "cardcaptor sakura: clear card-hen prologue - sakura to futatsu no kuma",
       "cardcaptor sakura: clear clard. episodio 23: sakura y los dos osos.",
       "ccs ova",
-      "sakura to futatsu no kuma",
       "カードキャプターさくら クリアカード編 さくらとふたつのくま",
       "カードキャプターさくら クリアカード編 プロローグ さくらとふたつのくま",
       "魔卡少女樱 透明牌篇 序幕 小樱与两人的小熊"
@@ -104111,11 +104043,9 @@
     "canonicalTitle": "Fukumenkei Noise",
     "aliases": [
       "Anonymous Noise",
-      "Cantando siempre",
       "anonymous noise",
       "cantando siempre",
       "fn",
-      "fukumenkei noise",
       "fukumenkeinoise",
       "fukuno",
       "fukuno s1",
@@ -104425,37 +104355,6 @@
       "jpdb": {
         "difficulty": 51,
         "url": "https://jpdb.io/anime/7348/fumetsu-no-anata-e/stats"
-      }
-    }
-  },
-  {
-    "id": "ao-fune-wo-amu",
-    "canonicalTitle": "Fune wo Amu",
-    "aliases": [
-      "Barca de Palavras",
-      "barca de palavras",
-      "compiling a ship",
-      "el gran pasaje",
-      "fune o amu",
-      "fune wo amu",
-      "funewoamu",
-      "the great passage",
-      "to compile a ship",
-      "големият брод",
-      "мы создаём корабль",
-      "编舟记",
-      "舟を編む",
-      "起航吧! 編舟計劃",
-      "배를 엮다"
-    ],
-    "ratings": {
-      "learnnatively": {
-        "level": null,
-        "url": null
-      },
-      "jpdb": {
-        "difficulty": 32,
-        "url": "https://jpdb.io/anime/494/fune-wo-amu/stats"
       }
     }
   },
@@ -106631,6 +106530,41 @@
     }
   },
   {
+    "id": "ao-hataraku-saibou",
+    "canonicalTitle": "Hataraku Saibou",
+    "aliases": [
+      "Lavori in corpo",
+      "caw s1",
+      "cells at work!",
+      "cells at work! lavori in corpo",
+      "cells at work! tv",
+      "cells at work!!",
+      "células no trabalho",
+      "hataraku saibou (2018)",
+      "hataraku saibō",
+      "hataraku saibō (2018)",
+      "lavori in corpo",
+      "les brigades immunitaires",
+      "клетки за работой!",
+      "الخلايا العاملة",
+      "เซลล์ขยัน พันธุ์เดือด",
+      "はたらく細胞",
+      "はたらく細胞 （2018）",
+      "工作细胞",
+      "일하는 세포"
+    ],
+    "ratings": {
+      "learnnatively": {
+        "level": null,
+        "url": null
+      },
+      "jpdb": {
+        "difficulty": 46,
+        "url": "https://jpdb.io/anime/840/hataraku-saibou/stats"
+      }
+    }
+  },
+  {
     "id": "ao-hataraku-saibou-black",
     "canonicalTitle": "Hataraku Saibou Black",
     "aliases": [
@@ -107900,25 +107834,16 @@
     "id": "ao-horimiya",
     "canonicalTitle": "Horimiya",
     "aliases": [
-      "Hori and Miyamura",
-      "Hori-san to Miyamura-kun",
       "Hori-san to Miyamura-kun (ほりさんとみやむらくん)",
-      "hori and miyamura",
-      "hori-san & miyamura-kun",
       "hori-san and miyamura-kun",
       "hori-san to miyamura-kun (ほりさんとみやむらくん)",
       "hori-san to miyamura-kun (堀さんと宮村くん)",
-      "horimiya",
-      "horimiya ova",
       "хоримия",
       "хорімія",
       "โฮริมิยะ สาวมั่นกับนายมืดมน",
       "ホリミヤ",
       "ホリミヤ hori-san to miyamura-kun",
-      "堀さんと宮村くん",
-      "堀与宫村",
-      "堀与宫村 ova",
-      "堀桑与宫村君"
+      "堀与宫村"
     ],
     "ratings": {
       "learnnatively": {
@@ -109088,12 +109013,10 @@
     "canonicalTitle": "Isekai wa Smartphone to Tomo ni.",
     "aliases": [
       "Em Outro Mundo Com Meu Smartphone",
-      "In Another World With My Smartphone",
       "em outro mundo com meu smartphone",
       "in a different world with a smartphone.",
       "in another world with my smartphone",
       "isekai wa smartphone to tomo ni",
-      "isekai wa smartphone to tomo ni.",
       "isesuma",
       "в другом мире со смартфоном",
       "ไปต่างโลก! ก็ต้องไปกับสมาร์ทโฟนสิ!!!",
@@ -109196,7 +109119,6 @@
     "id": "ao-jaku-chara-tomozaki-kun",
     "canonicalTitle": "Jaku-Chara Tomozaki-kun",
     "aliases": [
-      "Bottom-Tier Character Tomozaki",
       "bottom-tier character tomozaki",
       "jaku chara tomozaki-kun",
       "jaku-chara tomozaki-kun",
@@ -109342,12 +109264,9 @@
     "canonicalTitle": "Jinrui wa Suitai Shimashita",
     "aliases": [
       "El declive de la humanidad",
-      "Humanity Has Declined",
       "el declive de la humanidad",
       "humanity has declined",
       "humanity has declined: (jinrui wa suitai shimashita)",
-      "jinrui wa suitai shimashita",
-      "jinruiha suitaishimashita",
       "jintai",
       "mankind has fallen",
       "човечеството запада",
@@ -110163,34 +110082,8 @@
     "id": "ao-kaguya-sama-love-is-war",
     "canonicalTitle": "Kaguya-sama: Love is War",
     "aliases": [
-      "Kaguya",
-      "Kaguya-sama wa Kokurasetai: Tensai-tachi no Renai Zunousen",
-      "kaguya",
-      "kaguya wants to be confessed to: the geniuses' war of love and brains",
-      "kaguya wants to be confessed to: the geniuses’ war of love and brains",
-      "kaguya-sama",
-      "kaguya-sama : l'amour est une guerre",
-      "kaguya-sama : love is war",
-      "kaguya-sama wa kokurasetai",
       "kaguya-sama wa kokurasetai: tensai-tachi no renai zunōsen",
-      "kaguya-sama wa kokurasetai: tensai-tachi no ren’ai zunousen",
-      "kaguya-sama wa kokurasetai: tensai-tachi no ren’ai zunōsen",
-      "kaguya-sama wa kokurasetai: tensaitachi no renai zunousen",
-      "kaguya-sama: love is war",
-      "kauya-sama: love is war",
-      "miłość to wojna",
-      "госпожа кагуя: в любви как на войне",
-      "קאגויה סאמה",
-      "كاغويا تريد أن يعترف لها: ~حرب عباقرة القلوب والعقول~",
-      "สารภาพรักกับคุณคางุยะซะดีๆ ~สงครามประสาทความรักของเหล่าอัจฉริยะ~",
-      "かぐや様は告らせたい ~天才たちの恋愛頭脳戦~",
-      "かぐや様は告らせたい～天才たちの恋愛頭脳戦～",
-      "輝夜姬想讓人告白~天才們的戀愛頭腦戰~",
-      "辉告",
-      "辉夜大小姐想让我告白～天才们的恋爱头脑战～",
-      "辉夜姬想让人告白",
-      "辉夜姬想让人告白～天才们的恋爱头脑战～",
-      "카구야님은 고백받고 싶어 ~천재들의 연애 두뇌전~"
+      "かぐや様は告らせたい～天才たちの恋愛頭脳戦～"
     ],
     "ratings": {
       "learnnatively": {
@@ -110950,43 +110843,21 @@
     "id": "ao-kengan-ashura-season-2-part-2",
     "canonicalTitle": "Kengan Ashura Season 2 Part 2",
     "aliases": [
-      "Kengan Ashura",
-      "Kengan Ashura Season 2",
-      "kengan ashura",
-      "kengan ashura (2023)",
       "kengan ashura (2024)",
-      "kengan ashura 2",
       "kengan ashura 2 part 2",
       "kengan ashura 2: part ii",
-      "kengan ashura 2nd season",
       "kengan ashura 2nd season part 2",
-      "kengan ashura : saison 2",
       "kengan ashura : saison 2 (partie 2)",
-      "kengan ashura season 2",
-      "kengan ashura season 2 part 1",
-      "kengan ashura season 2 part 2",
       "kengan ashura season 2 part.2",
-      "kengan ashura: season 2",
       "kengan ashura: season 2 (part 2)",
-      "kengan ashura: staffel 2",
       "kengan ashura: staffel 2 (teil 2)",
-      "kengan ashura: stagione 2",
       "kengan ashura: stagione 2 (parte 2)",
-      "kengan ashura: temporada 2",
       "kengan ashura: temporada 2 (parte 2)",
-      "kenganashura s3",
-      "ケンガンアシュラ",
-      "ケンガンアシュラ (2023)",
-      "ケンガンアシュラ (続編)",
       "ケンガンアシュラ 2",
       "ケンガンアシュラ 2 part.2",
       "ケンガンアシュラ part 2",
-      "ケンガンアシュラ season2",
       "ケンガンアシュラ season2 part2",
-      "ケンガンアシュラ （2023）",
-      "ケンガンアシュラ （2024）",
-      "拳愿阿修罗 第二季",
-      "拳願阿修羅 第二季"
+      "ケンガンアシュラ （2024）"
     ],
     "ratings": {
       "learnnatively": {
@@ -111564,7 +111435,6 @@
     "canonicalTitle": "Kimagure Orange☆Road",
     "aliases": [
       "Capricciosa Orange Road",
-      "Kimagure Orange Road",
       "capricciosa orange road",
       "capricious orange road",
       "johnny y sus amigos",
@@ -111607,16 +111477,9 @@
     "canonicalTitle": "Kimagure Orange☆Road OVA",
     "aliases": [
       "Kimagure Orange Road OVA",
-      "Kimagure Orange Road: Hawaiian Suspense",
-      "kimagure orange road : suspense à hawaï",
       "kimagure orange road ova",
-      "kimagure orange road ova 2",
       "kimagure orange road ovas",
       "kimagure orange road: max et compagnie - oav",
-      "kimagure orange road: suspenso hawaiano",
-      "kimagure orange☆road ova",
-      "orange road: avventura alle hawaii",
-      "きまぐれオレンジ★ロード ハワイアン・サスペンス",
       "きまぐれオレンジ☆ロード"
     ],
     "ratings": {
@@ -111927,7 +111790,6 @@
     "aliases": [
       "Everlasting Heart",
       "everlasting heart",
-      "kimi to boku",
       "kimi to boku (2001)",
       "you and i",
       "キミとボク",
@@ -112952,7 +112814,6 @@
     "id": "ao-kore-wa-zombie-desu-ka",
     "canonicalTitle": "Kore wa Zombie desu ka?",
     "aliases": [
-      "Is This a Zombie?",
       "Kore wa Zombie desu ka",
       "bu bir zombi mi?",
       "is this a zombie?",
@@ -113750,9 +113611,7 @@
     "canonicalTitle": "Kuroshitsuji",
     "aliases": [
       "Black Butler",
-      "Czarny Lokaj",
       "black butler",
-      "czarny lokaj",
       "dark butler",
       "diácono negro temporada 1",
       "el mayordomo negro",
@@ -113761,7 +113620,6 @@
       "il maggiordomo nero",
       "kara uşak",
       "kuro shitsuji",
-      "kuroshitsuji",
       "kuroshitsuji s1",
       "kuroshitsuzi",
       "melnais virssulainis",
@@ -113769,7 +113627,6 @@
       "paslaptingasis liokajus",
       "su matzurdomu nieddu",
       "μαύρος μπάτλερ",
-      "демон-дворецкий",
       "темний дворецький",
       "тёмный дворецкий",
       "черният иконом",
@@ -113806,7 +113663,6 @@
       "hắc quản gia 2",
       "hắc quản gia – phần 2",
       "kuroshitsuji 2",
-      "kuroshitsuji ii",
       "kuroshitsuji s2",
       "monoshitsuji",
       "темний дворецький 2",
@@ -113822,7 +113678,6 @@
       "黑执事2",
       "黑执事ii",
       "黒執事ii",
-      "黒執事Ⅱ",
       "黒執事ⅱ",
       "흑집사 2기"
     ],
@@ -114632,8 +114487,6 @@
     "canonicalTitle": "Lucky☆Star",
     "aliases": [
       "Estrela da Sorte",
-      "Fuxing Ba Jie",
-      "Lucky Star",
       "estrela da sorte",
       "ls",
       "lstv",
@@ -114655,7 +114508,6 @@
       "幸运星",
       "幸運☆星",
       "幸運星",
-      "福星八戒",
       "러키☆스타"
     ],
     "ratings": {
@@ -118209,13 +118061,7 @@
     "id": "ao-one-punch-man-season-3-part-2",
     "canonicalTitle": "One-Punch Man Season 3 Part 2",
     "aliases": [
-      "One Punch Man (2027)",
-      "one punch man (2027)",
-      "one punch man 3 part 2",
-      "one-punch man: season 3 - part 2",
-      "one-punch man: staffel 3 - teil 2",
-      "ワンパンマン (2027)",
-      "ワンパンマン （2027）"
+      "one punch man 3 part 2"
     ],
     "ratings": {
       "learnnatively": {
@@ -120298,31 +120144,20 @@
     "id": "ao-saint-seiya-the-lost-canvas-meiou-shinwa",
     "canonicalTitle": "Saint Seiya: The Lost Canvas - Meiou Shinwa",
     "aliases": [
-      "Saint Seiya The Lost Canvas",
       "i cavalieri dello zodiaco - the lost canvas",
       "i cavalieri dello zodiaco: the lost canvas",
       "knights of the zodiac: the lost canvas ― season 1",
-      "les chevaliers du zodiaque - the lost canvas",
       "los guerreros del zodiaco: el lienzo perdido",
-      "loscan",
       "os cavaleiros do zodíaco - the lost canvas: a saga de hades",
       "os cavaleiros do zodíaco: a tela perdida",
       "os cavaleiros do zodíaco: the lost canvas",
-      "os cavaleiros do zodíaco: the lost canvas - a saga de hades",
-      "saint seiya - a tela perdida",
       "saint seiya: a tela perdida",
       "saint seiya: el quadre perdut",
       "saint seiya: los caballeros del zodiaco. the lost canvas",
       "saint seiya: the lost canvas",
       "saint seiya: the lost canvas - meiou shinwa",
-      "saint seiya: the lost canvas - meiou shinwa 2",
       "saint seiya: the lost canvas - meiō shinwa",
-      "saint seiya: the lost canvas 2",
       "saint seiya: the lost canvas ― season 1",
-      "saint seiya: ο χαμένος καμβάς - η μυθολογία του άδη",
-      "לוחמי הקודש: הקנבס האבוד",
-      "圣斗士星矢The Lost Canvas冥王神话",
-      "圣斗士星矢the lost canvas冥王神话",
       "聖闘士星矢 THE LOST CANVAS 冥王神話",
       "聖闘士星矢 the lost canvas 冥王神話"
     ],
@@ -120341,21 +120176,15 @@
     "id": "ao-saint-seiya-the-lost-canvas-meiou-shinwa-2",
     "canonicalTitle": "Saint Seiya: The Lost Canvas - Meiou Shinwa 2",
     "aliases": [
-      "Saint Seiya The Lost Canvas",
       "i cavalieri dello zodiaco: the lost canvas 2",
       "knights of the zodiac: the lost canvas ― season 2",
-      "les chevaliers du zodiaque - the lost canvas",
       "los guerreros del zodiaco: el lienzo perdido (temporada 2)",
       "los guerreros del zodiaco: el lienzo perdido - parte 2",
       "los guerreros del zodiaco: el lienzo perdido 2ª parte",
-      "loscan",
       "os cavaleiros de zodíaco - the lost canvas: a saga de hades 2ª parte",
-      "os cavaleiros do zodíaco: the lost canvas - a saga de hades",
-      "saint seiya - a tela perdida",
       "saint seiya: the lost canvas",
       "saint seiya: the lost canvas (season 2)",
       "saint seiya: the lost canvas (staffel 2)",
-      "saint seiya: the lost canvas - meiou shinwa",
       "saint seiya: the lost canvas - meiou shinwa 2",
       "saint seiya: the lost canvas - meiou shinwa 2nd chapter",
       "saint seiya: the lost canvas - meiō shinwa 2",
@@ -120365,12 +120194,7 @@
       "saint seiya: the lost canvas saision 2",
       "saint seiya: the lost canvas temporada 2",
       "saint seiya: the lost canvas ― season 2",
-      "saint seiya: ο χαμένος καμβάς - η μυθολογία του άδη",
-      "לוחמי הקודש: הקנבס האבוד",
-      "圣斗士星矢The Lost Canvas冥王神话",
-      "圣斗士星矢the lost canvas冥王神话",
       "聖闘士星矢 THE LOST CANVAS 冥王神話 2",
-      "聖闘士星矢 the lost canvas 冥王神話",
       "聖闘士星矢 the lost canvas 冥王神話 2",
       "聖闘士星矢 the lost canvas 冥王神話 第2章"
     ],
@@ -124057,19 +123881,15 @@
     "canonicalTitle": "Suisei no Gargantia",
     "aliases": [
       "Gargantia on The Verdurous Planet",
-      "Gargantia on the Verdurous Planet - Far Beyond The Voyage",
       "gargantia",
       "gargantia on the verdurous planet",
       "gargantia on the verdurous planet (suisei no gargantia)",
       "gargantia, ou o planeta verdejante",
       "suisei no galgantia",
-      "suisei no gargantia",
-      "suisei no gargantia: meguru kōro, haruka",
       "sunoga",
       "гаргантия на зелёной планете",
       "گارگانتیا در سیاره سبز",
       "翠星のガルガンティア",
-      "翠星のガルガンティア ～めぐる航路、遥か～",
       "翠星上的加爾岡緹亞",
       "翠星之加尔刚蒂亚",
       "취성의 가르간티아"
@@ -124117,7 +123937,6 @@
     "id": "ao-suki-tte-ii-na-yo",
     "canonicalTitle": "Suki tte Ii na yo.",
     "aliases": [
-      "Say \"I love you.\"",
       "Say I Love You",
       "say \"i love you\"",
       "say \"i love you\".",
@@ -124598,11 +124417,9 @@
     "canonicalTitle": "Tanaka-kun wa Itsumo Kedaruge",
     "aliases": [
       "Tanaka",
-      "Tanaka-kun is Always Listless",
       "tanaka",
       "tanaka kun",
       "tanaka-kun is always listless",
-      "tanaka-kun wa itsumo kedaruge",
       "tanaka-kun wa kyou mo kedaruge",
       "田中くんはいつもけだるげ",
       "田中君总是如此慵懒"
@@ -124622,10 +124439,7 @@
     "id": "ao-tanken-driland",
     "canonicalTitle": "Tanken Driland",
     "aliases": [
-      "Driland",
       "driland",
-      "tanken driland",
-      "دري لاند",
       "探検ドリランド",
       "探险托里兰托"
     ],
@@ -125005,7 +124819,6 @@
     "id": "ao-tenshi-no-3p",
     "canonicalTitle": "Tenshi no 3P!",
     "aliases": [
-      "Angel's 3Piece",
       "Here Comes the Three Angels",
       "angel's 3piece!",
       "angel’s 3piece!",
@@ -125014,12 +124827,10 @@
       "tenshi no 3-piece",
       "tenshi no 3-piece!",
       "tenshi no 3p",
-      "tenshi no 3p!",
       "tenshi no three piece!",
       "tn3p",
       "ангельское трио",
       "スリーピース",
-      "天使の3P！",
       "天使の3p!",
       "天使の3p[スリーピース]!",
       "天使の3p！",
@@ -126113,30 +125924,14 @@
     "aliases": [
       "Chronicle of the Wings",
       "TSUBASA翼",
-      "Tsubasa Chronicle",
       "chronicle of the wings",
-      "cotw",
-      "trc",
       "tsubasa",
-      "tsubasa - reservoire chronicle",
       "tsubasa chronicle",
-      "tsubasa chronicle (1. staffel)",
-      "tsubasa chronicles",
-      "tsubasa reservoir",
-      "tsubasa reservoir chronicle",
-      "tsubasa reservoir chronicles",
-      "tsubasa, las crónicas de sakura",
       "tsubasa: as crónicas de sakura",
       "tsubasa: cronicas de sakura",
-      "tsubasa: crónicas de sakura",
-      "tsubasa: reservoir chronicle",
       "tsubasa翼",
-      "хроника крыльев (сезон первый)",
       "تسوباسا كرونيكل",
-      "رحلة الأجنحة",
-      "สึบาสะ สงครามเทพข้ามมิติ",
       "ツバサ・クロニクル",
-      "翼·年代记",
       "츠바사 reservoir chronicle"
     ],
     "ratings": {
@@ -126526,26 +126321,12 @@
     "id": "ao-ultraman",
     "canonicalTitle": "Ultraman",
     "aliases": [
-      "Das Erwachen der Polar Saurier",
-      "The☆Ultraman",
       "ULTRAMAN",
-      "das erwachen der polar saurier",
-      "the adventures of ultraman / ultraman ii: the further adventures of ultraman",
-      "the ultraman",
       "ultraman",
-      "ultraman / ultraman schlägt zurück",
-      "ultraman ii : les nouvelles aventures",
-      "ultraman jo neus",
-      "ultraman joe",
-      "ultraman jonias",
-      "ultraman: the ultraman",
       "ультрамен",
       "ультрамен (2019)",
       "ультрамен: новый герой",
-      "الرجل الخارق",
       "ウルトラマン",
-      "ザ★ウルトラマン",
-      "ザ☆ウルトラマン",
       "机动奥特曼"
     ],
     "ratings": {
@@ -126621,7 +126402,6 @@
       "un drôle de père",
       "usadoro",
       "usadro",
-      "usagi drop",
       "white rabbit candy",
       "zagubiony króliczek",
       "брошенная зайка",
@@ -126629,11 +126409,9 @@
       "изоставеното зайче",
       "покинуте кроленя",
       "باران خرگوش",
-      "قطر الندى",
       "قطرة الأرنب",
       "うさぎドロップ",
       "うさドロ",
-      "白兔玩偶",
       "白兔糖",
       "토끼 드롭스"
     ],
@@ -126949,9 +126727,7 @@
     "canonicalTitle": "Wagaya no Oinari-sama.",
     "aliases": [
       "Oinari",
-      "Our Home's Fox Deity",
       "coo : our guardian",
-      "coo: our guardian",
       "oinari",
       "oinari-sama",
       "oinarisama",
@@ -126964,8 +126740,7 @@
       "我が家のお稲荷さま",
       "我が家のお稲荷さま.",
       "我が家のお稲荷さま。",
-      "我家有个狐仙大人",
-      "我家有個狐仙大人"
+      "我家有个狐仙大人"
     ],
     "ratings": {
       "learnnatively": {
@@ -127582,7 +127357,6 @@
       "il richiamo della notte",
       "night owl song",
       "song of the night walkers",
-      "yofukashi no uta",
       "zew nocy",
       "песнь ночных сов",
       "поклик ночі",
