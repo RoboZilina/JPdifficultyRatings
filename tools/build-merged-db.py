@@ -75,7 +75,24 @@ def main():
     
     print("\nBuilding candidate title index...")
     candidate_index = build_candidate_index(candidates)
-    print(f"  {len(candidate_index)} unique title forms indexed")
+    # Reverse index: normalized candidate title → candidate (for LN→candidate matching)
+    # Indexes canonicalTitle, en, ja, romaji, and aliases
+    rev_idx = {}
+    for c in candidates:
+        cid = c.get('id', '')
+        if not cid: continue
+        titles_list = [c.get('canonicalTitle','')]
+        t = c.get('titles', {})
+        if isinstance(t, dict):
+            for k in ('en', 'ja_jp', 'ja', 'romaji'):
+                if t.get(k): titles_list.append(t[k])
+        if isinstance(c.get('aliases'), list):
+            titles_list.extend(c['aliases'])
+        for t in titles_list:
+            n = normalize(t)
+            if n and n not in rev_idx:
+                rev_idx[n] = c
+    print(f"  {len(candidate_index)} unique title forms indexed, {len(rev_idx)} reverse index entries")
     
     print("\nCross-referencing LN entries with candidates...")
     
@@ -102,7 +119,7 @@ def main():
         for t in [ln_title, ln_english]:
             ln_variants.update(title_variants(t))
         
-        # Try to match
+        # Try to match (LN title → candidate titles)
         matched_candidate = None
         matched_idx = None
         for v in ln_variants:
@@ -110,6 +127,13 @@ def main():
                 matched_idx = candidate_index[v][0]
                 matched_candidate = candidates[matched_idx]
                 break
+        
+        # If no match, try reverse: candidate titles → LN title (try all LN variants)
+        if not matched_candidate:
+            for v in ln_variants:
+                if v and v in rev_idx:
+                    matched_candidate = rev_idx[v]
+                    break
         
         if matched_candidate:
             # Avoid matching generic LN titles to overly-specific spin-offs
