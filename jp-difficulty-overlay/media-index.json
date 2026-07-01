@@ -14260,27 +14260,12 @@
     }
   },
   {
-    "id": "ao-karakai-jouzu-no-takagi-san",
-    "canonicalTitle": "Karakai Jouzu no Takagi-san",
+    "id": "ao-teasing-master-takagi-san",
+    "canonicalTitle": "Teasing Master Takagi-san",
     "aliases": [
-      "Teasing Master Takagi-san",
-      "karakai jozu no takagi-san",
-      "karakai jōzu no takagi-san",
-      "nhất quỷ nhì ma, thứ ba takagi",
-      "nicht schon wieder, takagi-san",
-      "skilled teaser takagi-san",
-      "takagi",
-      "takagi-san s1",
-      "takagi-san: experta en bromas pesadas",
-      "teasing master takagi-san",
-      "τακάγκι-σαν, το αρχιπειραχτήρι",
-      "озорная такаги",
-      "טאקאגי-סאן אלופת ההקנטות",
-      "سيد الدعابة تاكاجي-سان",
-      "แกล้งนัก รักนะ รู้ยัง",
+      "karakai jōzu no takagi-san 3",
       "からかい上手の高木さん",
-      "擅长捉弄的高木同学",
-      "장난을 잘 치는 타카기양"
+      "からかい上手の高木さん３"
     ],
     "ratings": {
       "learnnatively": {
@@ -14288,8 +14273,8 @@
         "url": "https://learnnatively.com/movie/155cbee48e/"
       },
       "jpdb": {
-        "difficulty": 4,
-        "url": "https://jpdb.io/anime/758/karakai-jouzu-no-takagi-san/stats"
+        "difficulty": null,
+        "url": null
       }
     }
   },
@@ -19441,29 +19426,18 @@
     }
   },
   {
-    "id": "ao-hataraku-saibou",
-    "canonicalTitle": "Hataraku Saibou",
+    "id": "ao-tmdb-movie-1303162",
+    "canonicalTitle": "Cells at Work!",
     "aliases": [
-      "Cells at Work!",
-      "Lavori in corpo",
-      "caw s1",
-      "cells at work!",
-      "cells at work! lavori in corpo",
-      "cells at work! tv",
-      "cells at work!!",
-      "células no trabalho",
-      "hataraku saibou (2018)",
+      "hataraku saibou",
       "hataraku saibō",
-      "hataraku saibō (2018)",
-      "lavori in corpo",
-      "les brigades immunitaires",
-      "клетки за работой!",
-      "الخلايا العاملة",
-      "เซลล์ขยัน พันธุ์เดือด",
+      "เซลล์ขยันพันธุ์เดือด",
       "はたらく細胞",
-      "はたらく細胞 （2018）",
+      "はたらく細胞 実写版",
+      "工作細胞",
       "工作细胞",
-      "일하는 세포"
+      "工作细胞 真人版",
+      "映画 はたらく細胞"
     ],
     "ratings": {
       "learnnatively": {
@@ -19471,8 +19445,8 @@
         "url": "https://learnnatively.com/movie/6144ce1b65/"
       },
       "jpdb": {
-        "difficulty": 46,
-        "url": "https://jpdb.io/anime/840/hataraku-saibou/stats"
+        "difficulty": null,
+        "url": null
       }
     }
   },
@@ -20359,11 +20333,16 @@
     }
   },
   {
-    "id": "ao-fushigi-dagashiya-zenitendō",
-    "canonicalTitle": "Fushigi Dagashiya Zenitendō",
+    "id": "ao-fushigi-dagashiya-zenitendou",
+    "canonicalTitle": "Fushigi Dagashiya: Zenitendou",
     "aliases": [
-      "Fushigi Dagashiya: Zenitendou",
-      "ふしぎ駄菓子屋 銭天堂"
+      "Fushigi Dagashiya Zenitendou",
+      "fushigi dagashiya zenitendou",
+      "fushigi dagashiya: zenitendō",
+      "mysterious candy store sentendo",
+      "the supernatural sweet shop",
+      "ふしぎ駄菓子屋 銭天堂",
+      "神奇柑仔店"
     ],
     "ratings": {
       "learnnatively": {
@@ -22621,16 +22600,60 @@
     }
   },
   {
-    "id": "ao-tmdb-movie-127533",
-    "canonicalTitle": "Rurouni Kenshin Part I: Origins",
+    "id": "ao-rurouni-kenshin-meiji-kenkaku-romantan",
+    "canonicalTitle": "Rurouni Kenshin: Meiji Kenkaku Romantan",
     "aliases": [
+      "Kenshin",
+      "Rurouni Kenshin Part I: Origins",
+      "el guerrero samuraï",
+      "kenshin",
+      "kenshin - samurai vagabondo",
+      "kenshin le vagabond",
+      "kenshin samurai vagabondo",
+      "kenshin tv",
+      "kenshin, ang manlalakbay na samurai",
+      "kenshin, el guerrero samurai",
+      "kenshin, le vagabond",
+      "kenshin: el guerrero samurái",
+      "lãng khách kenshin",
+      "rk",
+      "rk tv",
+      "rktv",
+      "ruroken",
+      "ruroken tv",
       "rurouni kenshin",
+      "rurouni kenshin - legend of kyoto",
+      "rurouni kenshin - tales of the meiji",
+      "rurouni kenshin - wandering samurai",
+      "rurouni kenshin tv",
+      "rurouni kenshin: legend of kyoto",
+      "rurouni kenshin: meiji swordsman romantic story",
+      "rurouni kenshin: romance of a meiji swordsman",
+      "rurouni kenshin: tales of the meiji",
+      "rurouni kenshin: wandering samurai",
+      "rurōni kenshin: meiji kenkaku romantan",
       "samurai x",
-      "samurai x 1: o filme",
+      "samurajai x",
+      "samuray x",
+      "samurái x",
+      "wanderer kenshin",
+      "wandering kenshin: romantic tales from the meiji era",
+      "бродяга кэнсин",
+      "бродяга кэнщин",
+      "руроуні кеншін ~оповіді мейджі~",
+      "самурай х",
+      "רורואוני קנשין",
+      "الرحالة كينشن",
+      "روروني كنشين",
+      "ساموراي إكس",
+      "ซามูไรพเนจร",
       "るろうに剣心",
+      "るろうに剣心 -明治剣客浪漫譚-",
+      "るろうに剣心―明治剣客浪漫譚―",
+      "るろけん",
+      "るろ剣",
       "浪客剑心",
-      "浪客劍心",
-      "바람의 검심 (2012)"
+      "바람의 검심"
     ],
     "ratings": {
       "learnnatively": {
@@ -34949,14 +34972,14 @@
     }
   },
   {
-    "id": "ao-strike-witches-operation-victory-arrow-vol-3-arnhem-no-hashi",
-    "canonicalTitle": "Strike Witches Operation Victory Arrow Vol. 3: Arnhem no Hashi",
+    "id": "ao-strike-witches-operation-victory-arrow-vol-1-st-trond-no-raimei",
+    "canonicalTitle": "Strike Witches Operation Victory Arrow Vol. 1: St. Trond no Raimei",
     "aliases": [
       "Strike Witches: Operation Victory Arrow Vol.3 - The Bridge of Arnhem",
-      "strike witches operation victory arrow vol. 3: the bridge of arnhem",
+      "strike witches operation victory arrow vol. 1: saint trond's thunder",
       "ストライクウィッチーズ Operation Victory Arrow Vol.3 - アルンヘムの橋",
-      "ストライクウィッチーズ Operation Victory Arrow vol.3　アルンヘムの橋",
-      "ストライクウィッチーズ operation victory arrow vol.3　アルンヘムの橋"
+      "ストライクウィッチーズ Operation Victory Arrow vol.1　サン・トロンの雷鳴",
+      "ストライクウィッチーズ operation victory arrow vol.1　サン・トロンの雷鳴"
     ],
     "ratings": {
       "learnnatively": {
@@ -54435,11 +54458,14 @@
     }
   },
   {
-    "id": "ao-mikeneko-holmes-no-yurei-joshu",
-    "canonicalTitle": "Mikeneko Holmes no Yurei Joshu",
+    "id": "ao-mikeneko-holmes-no-yuurei-joushu",
+    "canonicalTitle": "Mikeneko Holmes no Yuurei Joushu",
     "aliases": [
       "Calico Cat Holmes and the Lord of the Haunted Castle",
-      "三毛猫ホームズの幽霊城主"
+      "calico cat holmes and the lord of the haunted castle",
+      "mikeneko holmes no yūrei jōshu",
+      "三毛猫ホームズの幽霊城主",
+      "三色猫幽灵城主"
     ],
     "ratings": {
       "learnnatively": {
@@ -58860,10 +58886,11 @@
     }
   },
   {
-    "id": "ao-first-love",
-    "canonicalTitle": "First Love",
+    "id": "ao-hatsukoi",
+    "canonicalTitle": "Hatsukoi",
     "aliases": [
-      "ファースト ラブ",
+      "First Love",
+      "first love",
       "初恋"
     ],
     "ratings": {
@@ -58878,10 +58905,11 @@
     }
   },
   {
-    "id": "ao-first-love",
-    "canonicalTitle": "First Love",
+    "id": "ao-hatsukoi",
+    "canonicalTitle": "Hatsukoi",
     "aliases": [
-      "ファースト ラブ",
+      "First Love",
+      "first love",
       "初恋"
     ],
     "ratings": {
@@ -64304,20 +64332,29 @@
     }
   },
   {
-    "id": "ao-yume-sora-takaku",
-    "canonicalTitle": "Yume, Sora Takaku",
+    "id": "ao-ufo-princess-valkyrie-4-toki-to-yume-to-ginga-no-utage",
+    "canonicalTitle": "UFO Princess Valkyrie 4: Toki to Yume to Ginga no Utage",
     "aliases": [
       "Dreams",
-      "Sora Takaku",
-      "dream, high in the sky",
-      "sora takaku",
-      "yume",
-      "yume, soratakaku",
-      "夢",
-      "夢, 空高く",
-      "夢、 空高く",
-      "夢、空高く",
-      "空高く"
+      "and galaxies",
+      "dreams",
+      "ufo princess valkyrie 4",
+      "ufo princess valkyrie: toki to yume to ginga no utage",
+      "ufo princess walkure 4",
+      "ufo princess walkure happy party paradise",
+      "ufo princess walküre 4",
+      "ufo princess walküre: toki to yume to ginga no utage",
+      "ufo princess warukyure: toki to yume to ginga no utage",
+      "ufo ultramaiden valkyrie 4: banquet of time",
+      "ufo ultramaiden valkyrie 4: banquet of time, dreams, and galaxies",
+      "ufo ultramaiden valkyrie: season 4",
+      "ufo4",
+      "ufopw4",
+      "неземная принцесса валькирия 4",
+      "เทวดาท่าจะป่วน",
+      "円盤皇女ワるきゅーレ 時と夢と銀河の宴",
+      "圓盤皇女-時空與夢想的銀河之宴",
+      "夢"
     ],
     "ratings": {
       "learnnatively": {
@@ -69135,18 +69172,33 @@
     }
   },
   {
-    "id": "ao-tmdb-movie-796849",
-    "canonicalTitle": "Ride or Die",
+    "id": "ao-kanojo-okarishimasu",
+    "canonicalTitle": "Kanojo, Okarishimasu",
     "aliases": [
-      "gunjou",
-      "gunjō",
+      "Kano Kari",
+      "Ride or Die",
+      "dziewczyna do wynajęcia",
+      "i'd like to borrow a girlfriend",
+      "i’d like to borrow a girlfriend",
+      "kano kari",
       "kanojo",
-      "ultramarine",
-      "либо вместе, либо никак",
+      "kanokari",
+      "novia de alquiler",
+      "okarishimasu",
+      "pacar sewaan",
+      "rent-a-girlfriend",
+      "rental girlfriend",
+      "девушка на час",
+      "девушка напрокат",
+      "استأجر حبيبة",
+      "สะดุดรักยัยแฟนเช่า",
+      "お借りします",
+      "出租女友",
       "彼女",
-      "彼女：2021",
-      "羣青",
-      "라이드 오어 다이"
+      "彼女, お借りします",
+      "彼女、お借りします",
+      "租借女友",
+      "租赁女友"
     ],
     "ratings": {
       "learnnatively": {
@@ -69154,8 +69206,8 @@
         "url": "https://learnnatively.com/movie/2635125c48/"
       },
       "jpdb": {
-        "difficulty": null,
-        "url": null
+        "difficulty": 38,
+        "url": "https://jpdb.io/anime/7347/kanojo-okarishimasu/stats"
       }
     }
   },
@@ -85186,40 +85238,22 @@
     }
   },
   {
-    "id": "ao-yakusoku-no-neverland-2nd-season",
-    "canonicalTitle": "Yakusoku no Neverland 2nd Season",
+    "id": "ao-yakusoku-no-neverland",
+    "canonicalTitle": "Yakusoku no Neverland",
     "aliases": [
+      "THE PROMISED NEVERLAND",
       "The Promised Neverland",
-      "the promise neverland saison 2",
-      "the promise neverland temporada 2",
       "the promised neverland",
-      "the promised neverland (2021)",
-      "the promised neverland 2",
-      "the promised neverland 2nd season",
-      "the promised neverland saison 2",
-      "the promised neverland season 2",
-      "the promised neverland staffel 2",
-      "the promised neverland stagione 2",
-      "tpn 2",
-      "tpn2",
+      "tpn",
       "yakuneba",
-      "yakuneba 2",
-      "yakusoku no neverland",
-      "yakusoku no neverland (2021)",
-      "yakusoku no neverland 2",
-      "yakusoku no neverland s2",
-      "обещанная страна грёз 2 сезон",
-      "ארץ לעולם לא המובטחת (2021)",
-      "พันธสัญญาเนเวอร์แลนด์ ภาค 2",
-      "約定的夢幻島 第二季",
+      "обещанная страна грёз",
+      "ארץ לעולם לא המובטחת",
+      "نيفرلاند الموعودة",
+      "พันธสัญญาเนเวอร์แลนด์",
+      "約定的夢幻島",
       "約束のネバーランド",
-      "約束のネバーランド (2021)",
-      "約束のネバーランド 2",
-      "約束のネバーランド 第2期",
-      "約束のネバーランド （2021）",
-      "約束のネバーランド2",
-      "约定的梦幻岛 第二季",
-      "약속의 네버랜드 s2"
+      "约定的梦幻岛",
+      "약속의 네버랜드"
     ],
     "ratings": {
       "learnnatively": {
@@ -85227,8 +85261,8 @@
         "url": "https://learnnatively.com/movie/2dc2ab9f08/"
       },
       "jpdb": {
-        "difficulty": 54,
-        "url": "https://jpdb.io/anime/7358/yakusoku-no-neverland-s2/stats"
+        "difficulty": 32,
+        "url": "https://jpdb.io/anime/897/yakusoku-no-neverland/stats"
       }
     }
   },
@@ -87356,25 +87390,14 @@
     }
   },
   {
-    "id": "ao-fune-wo-amu",
-    "canonicalTitle": "Fune wo Amu",
+    "id": "ao-the-great-passage",
+    "canonicalTitle": "The Great Passage",
     "aliases": [
       "Barca de Palavras",
-      "The Great Passage",
       "barca de palavras",
-      "compiling a ship",
-      "el gran pasaje",
       "fune o amu",
       "fune wo amu",
-      "funewoamu",
-      "the great passage",
-      "to compile a ship",
-      "големият брод",
-      "мы создаём корабль",
-      "编舟记",
-      "舟を編む",
-      "起航吧! 編舟計劃",
-      "배를 엮다"
+      "舟を編む"
     ],
     "ratings": {
       "learnnatively": {
@@ -87382,8 +87405,8 @@
         "url": "https://learnnatively.com/movie/2417024715/"
       },
       "jpdb": {
-        "difficulty": 32,
-        "url": "https://jpdb.io/anime/494/fune-wo-amu/stats"
+        "difficulty": null,
+        "url": null
       }
     }
   },
@@ -104297,6 +104320,37 @@
     }
   },
   {
+    "id": "ao-fune-wo-amu",
+    "canonicalTitle": "Fune wo Amu",
+    "aliases": [
+      "Barca de Palavras",
+      "barca de palavras",
+      "compiling a ship",
+      "el gran pasaje",
+      "fune o amu",
+      "fune wo amu",
+      "funewoamu",
+      "the great passage",
+      "to compile a ship",
+      "големият брод",
+      "мы создаём корабль",
+      "编舟记",
+      "舟を編む",
+      "起航吧! 編舟計劃",
+      "배를 엮다"
+    ],
+    "ratings": {
+      "learnnatively": {
+        "level": null,
+        "url": null
+      },
+      "jpdb": {
+        "difficulty": 32,
+        "url": "https://jpdb.io/anime/494/fune-wo-amu/stats"
+      }
+    }
+  },
+  {
     "id": "ao-futari-wa-precure-max-heart",
     "canonicalTitle": "Futari wa Precure: Max Heart",
     "aliases": [
@@ -106464,6 +106518,41 @@
       "jpdb": {
         "difficulty": 40,
         "url": "https://jpdb.io/anime/890/hataraku-maou-sama/stats"
+      }
+    }
+  },
+  {
+    "id": "ao-hataraku-saibou",
+    "canonicalTitle": "Hataraku Saibou",
+    "aliases": [
+      "Lavori in corpo",
+      "caw s1",
+      "cells at work!",
+      "cells at work! lavori in corpo",
+      "cells at work! tv",
+      "cells at work!!",
+      "células no trabalho",
+      "hataraku saibou (2018)",
+      "hataraku saibō",
+      "hataraku saibō (2018)",
+      "lavori in corpo",
+      "les brigades immunitaires",
+      "клетки за работой!",
+      "الخلايا العاملة",
+      "เซลล์ขยัน พันธุ์เดือด",
+      "はたらく細胞",
+      "はたらく細胞 （2018）",
+      "工作细胞",
+      "일하는 세포"
+    ],
+    "ratings": {
+      "learnnatively": {
+        "level": null,
+        "url": null
+      },
+      "jpdb": {
+        "difficulty": 46,
+        "url": "https://jpdb.io/anime/840/hataraku-saibou/stats"
       }
     }
   },
@@ -110329,45 +110418,6 @@
     }
   },
   {
-    "id": "ao-kanojo-okarishimasu",
-    "canonicalTitle": "Kanojo, Okarishimasu",
-    "aliases": [
-      "Kano Kari",
-      "dziewczyna do wynajęcia",
-      "i'd like to borrow a girlfriend",
-      "i’d like to borrow a girlfriend",
-      "kano kari",
-      "kanojo",
-      "kanokari",
-      "novia de alquiler",
-      "okarishimasu",
-      "pacar sewaan",
-      "rent-a-girlfriend",
-      "rental girlfriend",
-      "девушка на час",
-      "девушка напрокат",
-      "استأجر حبيبة",
-      "สะดุดรักยัยแฟนเช่า",
-      "お借りします",
-      "出租女友",
-      "彼女",
-      "彼女, お借りします",
-      "彼女、お借りします",
-      "租借女友",
-      "租赁女友"
-    ],
-    "ratings": {
-      "learnnatively": {
-        "level": null,
-        "url": null
-      },
-      "jpdb": {
-        "difficulty": 38,
-        "url": "https://jpdb.io/anime/7347/kanojo-okarishimasu/stats"
-      }
-    }
-  },
-  {
     "id": "ao-kanon-2006",
     "canonicalTitle": "Kanon (2006)",
     "aliases": [
@@ -110428,6 +110478,39 @@
       "jpdb": {
         "difficulty": 37,
         "url": "https://jpdb.io/anime/561/kantai-collection/stats"
+      }
+    }
+  },
+  {
+    "id": "ao-karakai-jouzu-no-takagi-san",
+    "canonicalTitle": "Karakai Jouzu no Takagi-san",
+    "aliases": [
+      "karakai jozu no takagi-san",
+      "karakai jōzu no takagi-san",
+      "nhất quỷ nhì ma, thứ ba takagi",
+      "nicht schon wieder, takagi-san",
+      "skilled teaser takagi-san",
+      "takagi",
+      "takagi-san s1",
+      "takagi-san: experta en bromas pesadas",
+      "teasing master takagi-san",
+      "τακάγκι-σαν, το αρχιπειραχτήρι",
+      "озорная такаги",
+      "טאקאגי-סאן אלופת ההקנטות",
+      "سيد الدعابة تاكاجي-سان",
+      "แกล้งนัก รักนะ รู้ยัง",
+      "からかい上手の高木さん",
+      "擅长捉弄的高木同学",
+      "장난을 잘 치는 타카기양"
+    ],
+    "ratings": {
+      "learnnatively": {
+        "level": null,
+        "url": null
+      },
+      "jpdb": {
+        "difficulty": 4,
+        "url": "https://jpdb.io/anime/758/karakai-jouzu-no-takagi-san/stats"
       }
     }
   },
@@ -127195,21 +127278,40 @@
     }
   },
   {
-    "id": "ao-yakusoku-no-neverland",
-    "canonicalTitle": "Yakusoku no Neverland",
+    "id": "ao-yakusoku-no-neverland-2nd-season",
+    "canonicalTitle": "Yakusoku no Neverland 2nd Season",
     "aliases": [
-      "THE PROMISED NEVERLAND",
+      "The Promised Neverland",
+      "the promise neverland saison 2",
+      "the promise neverland temporada 2",
       "the promised neverland",
-      "tpn",
+      "the promised neverland (2021)",
+      "the promised neverland 2",
+      "the promised neverland 2nd season",
+      "the promised neverland saison 2",
+      "the promised neverland season 2",
+      "the promised neverland staffel 2",
+      "the promised neverland stagione 2",
+      "tpn 2",
+      "tpn2",
       "yakuneba",
-      "обещанная страна грёз",
-      "ארץ לעולם לא המובטחת",
-      "نيفرلاند الموعودة",
-      "พันธสัญญาเนเวอร์แลนด์",
-      "約定的夢幻島",
+      "yakuneba 2",
+      "yakusoku no neverland",
+      "yakusoku no neverland (2021)",
+      "yakusoku no neverland 2",
+      "yakusoku no neverland s2",
+      "обещанная страна грёз 2 сезон",
+      "ארץ לעולם לא המובטחת (2021)",
+      "พันธสัญญาเนเวอร์แลนด์ ภาค 2",
+      "約定的夢幻島 第二季",
       "約束のネバーランド",
-      "约定的梦幻岛",
-      "약속의 네버랜드"
+      "約束のネバーランド (2021)",
+      "約束のネバーランド 2",
+      "約束のネバーランド 第2期",
+      "約束のネバーランド （2021）",
+      "約束のネバーランド2",
+      "约定的梦幻岛 第二季",
+      "약속의 네버랜드 s2"
     ],
     "ratings": {
       "learnnatively": {
@@ -127217,8 +127319,8 @@
         "url": null
       },
       "jpdb": {
-        "difficulty": 32,
-        "url": "https://jpdb.io/anime/897/yakusoku-no-neverland/stats"
+        "difficulty": 54,
+        "url": "https://jpdb.io/anime/7358/yakusoku-no-neverland-s2/stats"
       }
     }
   },
