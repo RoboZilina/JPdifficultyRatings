@@ -83,6 +83,7 @@ def main():
     with_both = 0
     ln_only = 0
     unified = []
+    matched_candidate_ids = set()  # Track which candidates were matched via LN
     unmatched_entries = []  # NEW: Track unmatched LN entries
     
     for ln_entry in ln_entries:
@@ -111,6 +112,22 @@ def main():
                 break
         
         if matched_candidate:
+            # Avoid matching generic LN titles to overly-specific spin-offs
+            ln_simple = (ln_english or ln_title).lower()
+            cand_simple = matched_candidate.get('canonicalTitle', '').lower()
+            
+            # If LN title is short but candidate is very specific, look for a better match
+            if len(ln_simple) < 25 and len(cand_simple) > len(ln_simple) + 10:
+                norm_ln = normalize(ln_simple)
+                alternatives = [c for c in candidates 
+                              if normalize(c.get('canonicalTitle', '')) == norm_ln]
+                if alternatives:
+                    # Prefer the candidate with the shortest canonical title (likely main series)
+                    best = min(alternatives, key=lambda c: len(c.get('canonicalTitle', '')))
+                    if best['id'] != matched_candidate['id']:
+                        print(f"    ↑ Corrected match: {matched_candidate.get('canonicalTitle','')[:40]} → {best.get('canonicalTitle','')[:40]}")
+                        matched_candidate = best
+            
             # Matched to anime-offline-database: use candidate titles
             c = matched_candidate
             titles_dict = {
@@ -128,6 +145,8 @@ def main():
                 jpdb_score = c['difficulty']
             
             candidate_id = c.get('id', '')
+            if candidate_id:
+                matched_candidate_ids.add(candidate_id)
             matched += 1
             if ln_lvl is not None:
                 with_both += 1
@@ -193,13 +212,67 @@ def main():
             },
         })
     
+    # ===== Second pass: add unmatched candidates with jpdb scores =====
+    candidate_only = 0
+    for c in candidates:
+        cid = c.get('id', '')
+        if not cid or cid in matched_candidate_ids:
+            continue
+        # Only include candidates that have a jpdb difficulty score
+        ratings = c.get('ratings', {})
+        jpdb_score = None
+        if isinstance(ratings, dict) and 'jpdb' in ratings:
+            jpdb_score = ratings['jpdb'].get('difficulty') if isinstance(ratings['jpdb'], dict) else None
+        if jpdb_score is None and c.get('difficulty') is not None:
+            jpdb_score = c['difficulty']
+        if jpdb_score is None:
+            continue
+        
+        titles_dict = {
+            'en': c.get('titles', {}).get('en', '') if isinstance(c.get('titles'), dict) else '',
+            'ja': c.get('titles', {}).get('ja_jp', '') or c.get('titles', {}).get('ja', '') or '',
+            'romaji': c.get('titles', {}).get('romaji', '') if isinstance(c.get('titles'), dict) else '',
+        }
+        aliases = c.get('aliases', []) or []
+        canonical = titles_dict['en'] or titles_dict['ja'] or titles_dict['romaji'] or c.get('canonicalTitle', '') or ''
+        
+        aliases_set = set()
+        for t in [titles_dict['en'], titles_dict['ja'], titles_dict['romaji']]:
+            if t and t != canonical:
+                aliases_set.add(t)
+        for a in aliases:
+            if a and a != canonical:
+                aliases_set.add(a)
+        
+        jpdb_url = None
+        if isinstance(ratings, dict) and 'jpdb' in ratings and isinstance(ratings['jpdb'], dict):
+            jpdb_url = ratings['jpdb'].get('url')
+        
+        unified.append({
+            'id': f'ao-{cid}',
+            'canonicalTitle': canonical,
+            'aliases': sorted(aliases_set) if aliases_set else [],
+            'ratings': {
+                'learnnatively': {
+                    'level': None,
+                    'url': None,
+                },
+                'jpdb': {
+                    'difficulty': jpdb_score,
+                    'url': jpdb_url or None,
+                },
+            },
+        })
+        candidate_only += 1
+    
     print(f"\nResults:")
-    print(f"  Total LN entries:     {len(ln_entries)}")
-    print(f"  Matched to candidate: {matched}")
-    print(f"  With both ratings:    {with_both}")
-    print(f"  LN only (no jpdb):    {ln_only}")
-    print(f"  Unmatched (no jpdb):  {len(unmatched_entries)}")
-    print(f"  Total unified:        {len(unified)}")
+    print(f"  Total LN entries:       {len(ln_entries)}")
+    print(f"  Matched to candidate:   {matched}")
+    print(f"  With both ratings:      {with_both}")
+    print(f"  LN only (no jpdb):      {ln_only}")
+    print(f"  Unmatched (no jpdb):    {len(unmatched_entries)}")
+    print(f"  Candidate-only (jpdb):  {candidate_only}")
+    print(f"  Total unified:          {len(unified)}")
     
     # Save merged DB
     outfile = DATA_DIR / 'media-index-merged.json'
