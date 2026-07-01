@@ -236,8 +236,52 @@ def main():
             },
         })
     
-    # ===== Second pass: add unmatched candidates that have jpdb scores =====
-    candidate_only = 0
+    # ===== Add title-only candidates for searchability (no ratings, just titles) =====
+    # These go into candidate_mappings (placed before rated entries at the end).
+    # This makes titles like "Blue Box" findable even without a rating.
+    candidate_mappings = []
+    for c in candidates:
+        cid = c.get('id', '')
+        if not cid or cid in matched_candidate_ids:
+            continue
+        ratings = c.get('ratings', {})
+        jpdb_score = None
+        if isinstance(ratings, dict) and 'jpdb' in ratings:
+            jpdb_score = ratings['jpdb'].get('difficulty') if isinstance(ratings['jpdb'], dict) else None
+        if jpdb_score is None and c.get('difficulty') is not None:
+            jpdb_score = c['difficulty']
+        
+        titles_dict = {
+            'en': c.get('titles', {}).get('en', '') if isinstance(c.get('titles'), dict) else '',
+            'ja': c.get('titles', {}).get('ja_jp', '') or c.get('titles', {}).get('ja', '') or '',
+            'romaji': c.get('titles', {}).get('romaji', '') if isinstance(c.get('titles'), dict) else '',
+        }
+        aliases = c.get('aliases', []) or []
+        canonical = titles_dict['en'] or titles_dict['ja'] or titles_dict['romaji'] or c.get('canonicalTitle', '') or ''
+        
+        aliases_set = set()
+        for t in [titles_dict['en'], titles_dict['ja'], titles_dict['romaji']]:
+            if t and t != canonical: aliases_set.add(t)
+        for a in aliases:
+            if a and a != canonical: aliases_set.add(a)
+        
+        jpdb_url = None
+        if isinstance(ratings, dict) and 'jpdb' in ratings and isinstance(ratings['jpdb'], dict):
+            jpdb_url = ratings['jpdb'].get('url')
+        
+        candidate_mappings.append({
+            'id': f'ao-{cid}',
+            'canonicalTitle': canonical,
+            'aliases': sorted(aliases_set) if aliases_set else [],
+            'ratings': {
+                'learnnatively': {'level': None, 'url': None},
+                'jpdb': {'difficulty': jpdb_score, 'url': jpdb_url or None},
+            },
+        })
+    
+    # ===== Add candidates that have jpdb scores as additional rated entries =====
+    # These are anime not in LN but with jpdb scores (e.g. Horimiya, Jujutsu Kaisen)
+    jpdb_only = 0
     for c in candidates:
         cid = c.get('id', '')
         if not cid or cid in matched_candidate_ids:
@@ -269,7 +313,9 @@ def main():
         if isinstance(ratings, dict) and 'jpdb' in ratings and isinstance(ratings['jpdb'], dict):
             jpdb_url = ratings['jpdb'].get('url')
         
-        unified.append({
+        # Insert AFTER title-only mappings but BEFORE LN entries,
+        # so LN entries still win in Map.set() collisions
+        candidate_mappings.append({
             'id': f'ao-{cid}',
             'canonicalTitle': canonical,
             'aliases': sorted(aliases_set) if aliases_set else [],
@@ -278,15 +324,47 @@ def main():
                 'jpdb': {'difficulty': jpdb_score, 'url': jpdb_url or None},
             },
         })
-        candidate_only += 1
+        jpdb_only += 1
+    
+    # Concatenate: title-only candidates FIRST, jpdb-only SECOND, LN entries LAST (win)
+    unified = candidate_mappings + unified
+    
+    # Enrich all entries with alternative titles from candidates
+    # Build a lookup: normalized canonicalTitle → (en, ja, romaji, aliases)
+    enrich_idx = {}
+    for c in candidates:
+        n = normalize(c.get('canonicalTitle', ''))
+        if n:
+            titles = c.get('titles', {})
+            en = titles.get('en', '') if isinstance(titles, dict) else ''
+            ja = titles.get('ja_jp', '') or titles.get('ja', '') or '' if isinstance(titles, dict) else ''
+            rom = titles.get('romaji', '') if isinstance(titles, dict) else ''
+            aliases = c.get('aliases', []) or []
+            enrich_idx[n] = {'en': en, 'ja': ja, 'romaji': rom, 'aliases': aliases}
+    
+    enriched = 0
+    for entry in unified:
+        n = normalize(entry.get('canonicalTitle', ''))
+        if n and n in enrich_idx:
+            extra = enrich_idx[n]
+            existing = set(entry.get('aliases', []))
+            for t in [extra['ja'], extra['romaji'], extra['en']]:
+                if t and t != entry['canonicalTitle'] and t not in existing:
+                    existing.add(t)
+                    enriched += 1
+            for a in extra['aliases']:
+                if a and a != entry['canonicalTitle'] and a not in existing:
+                    existing.add(a)
+                    enriched += 1
+            entry['aliases'] = sorted(existing)
     
     print(f"\nResults:")
     print(f"  Total LN entries:       {len(ln_entries)}")
     print(f"  Matched to candidate:   {matched}")
     print(f"  With both ratings:      {with_both}")
     print(f"  LN only (no jpdb):      {ln_only}")
-    print(f"  Candidate-only (jpdb):  {candidate_only}")
     print(f"  Total unified:          {len(unified)}")
+    print(f"  Aliases enriched:       {enriched}")
     
     # Save merged DB
     outfile = DATA_DIR / 'media-index-merged.json'
