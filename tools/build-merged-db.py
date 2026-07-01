@@ -125,7 +125,7 @@ def main():
                     # Prefer the candidate with the shortest canonical title (likely main series)
                     best = min(alternatives, key=lambda c: len(c.get('canonicalTitle', '')))
                     if best['id'] != matched_candidate['id']:
-                        print(f"    ↑ Corrected match: {matched_candidate.get('canonicalTitle','')[:40]} → {best.get('canonicalTitle','')[:40]}")
+                        print(f"    Corrected: [{matched_candidate.get('canonicalTitle','')[:40]}] -> [{best.get('canonicalTitle','')[:40]}]")
                         matched_candidate = best
             
             # Matched to anime-offline-database: use candidate titles
@@ -212,20 +212,20 @@ def main():
             },
         })
     
-    # ===== Second pass: add unmatched candidates (for title mapping) =====
-    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    # ===== Second pass: add unmatched candidates that have jpdb scores =====
     candidate_only = 0
     for c in candidates:
         cid = c.get('id', '')
         if not cid or cid in matched_candidate_ids:
             continue
-        
         ratings = c.get('ratings', {})
         jpdb_score = None
         if isinstance(ratings, dict) and 'jpdb' in ratings:
             jpdb_score = ratings['jpdb'].get('difficulty') if isinstance(ratings['jpdb'], dict) else None
         if jpdb_score is None and c.get('difficulty') is not None:
             jpdb_score = c['difficulty']
+        if jpdb_score is None:
+            continue
         
         titles_dict = {
             'en': c.get('titles', {}).get('en', '') if isinstance(c.get('titles'), dict) else '',
@@ -237,11 +237,9 @@ def main():
         
         aliases_set = set()
         for t in [titles_dict['en'], titles_dict['ja'], titles_dict['romaji']]:
-            if t and t != canonical:
-                aliases_set.add(t)
+            if t and t != canonical: aliases_set.add(t)
         for a in aliases:
-            if a and a != canonical:
-                aliases_set.add(a)
+            if a and a != canonical: aliases_set.add(a)
         
         jpdb_url = None
         if isinstance(ratings, dict) and 'jpdb' in ratings and isinstance(ratings['jpdb'], dict):
@@ -252,14 +250,8 @@ def main():
             'canonicalTitle': canonical,
             'aliases': sorted(aliases_set) if aliases_set else [],
             'ratings': {
-                'learnnatively': {
-                    'level': None,
-                    'url': None,
-                },
-                'jpdb': {
-                    'difficulty': jpdb_score,
-                    'url': jpdb_url or None,
-                },
+                'learnnatively': {'level': None, 'url': None},
+                'jpdb': {'difficulty': jpdb_score, 'url': jpdb_url or None},
             },
         })
         candidate_only += 1
@@ -269,7 +261,6 @@ def main():
     print(f"  Matched to candidate:   {matched}")
     print(f"  With both ratings:      {with_both}")
     print(f"  LN only (no jpdb):      {ln_only}")
-    print(f"  Unmatched (no jpdb):    {len(unmatched_entries)}")
     print(f"  Candidate-only (jpdb):  {candidate_only}")
     print(f"  Total unified:          {len(unified)}")
     
