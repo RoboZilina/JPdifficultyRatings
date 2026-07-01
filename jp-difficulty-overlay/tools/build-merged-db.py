@@ -9,7 +9,7 @@ Strategy: Build from LN catalog, cross-reference with candidates for jpdb scores
 Output: media-index-merged.json (for the extension). Source files preserved.
 """
 
-import json, re
+import json, re, sys
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / 'data'
@@ -212,21 +212,20 @@ def main():
             },
         })
     
-    # ===== Second pass: add unmatched candidates with jpdb scores =====
+    # ===== Second pass: add unmatched candidates (for title mapping) =====
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
     candidate_only = 0
     for c in candidates:
         cid = c.get('id', '')
         if not cid or cid in matched_candidate_ids:
             continue
-        # Only include candidates that have a jpdb difficulty score
+        
         ratings = c.get('ratings', {})
         jpdb_score = None
         if isinstance(ratings, dict) and 'jpdb' in ratings:
             jpdb_score = ratings['jpdb'].get('difficulty') if isinstance(ratings['jpdb'], dict) else None
         if jpdb_score is None and c.get('difficulty') is not None:
             jpdb_score = c['difficulty']
-        if jpdb_score is None:
-            continue
         
         titles_dict = {
             'en': c.get('titles', {}).get('en', '') if isinstance(c.get('titles'), dict) else '',
