@@ -316,7 +316,7 @@ Phase 5: Import & Merge
 - **jpdb** - Vocab difficulty 1-100 (manual entry required)
 - **Netflix/Crunchyroll** - Platform aliases (manual mapping)
 
-See [tools/CURATION_GUIDE.md](tools/CURATION_GUIDE.md) and [tools/SCALING_GUIDE.md](tools/SCALING_GUIDE.md) for detailed sourcing strategies.
+See [tools/DATA_PIPELINE.md](tools/DATA_PIPELINE.md) for the **real pipeline** that was used to build the current 5,820-entry database, or [tools/CURATION_GUIDE.md](tools/CURATION_GUIDE.md) and [tools/SCALING_GUIDE.md](tools/SCALING_GUIDE.md) for the aspirational community workflow.
 
 ## Development
 
