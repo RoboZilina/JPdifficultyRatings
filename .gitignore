@@ -16,5 +16,14 @@ node_modules/
 # Compressed archives
 *.zip
 
-# Generated build output
+# Build output and generated data
 data/
+files/
+files2/
+
+# Screenshots and debug output
+*.png
+blue-box-results.txt
+blue-box-results2.txt
+check-blue-box-output.txt
+build-output.txt

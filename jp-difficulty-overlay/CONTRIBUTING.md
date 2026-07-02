@@ -31,6 +31,52 @@ We're scaling the database from a handful of titles to 5000+ anime with ratings.
 
 All contributions are valued, even partial ones (50% coverage is useful!).
 
+## Data Pipeline & Source Transparency
+
+The current `media-index.json` (5,820 entries) was built using a one-time, offline batch pipeline. Every source and tool is documented here so contributors understand exactly where the data came from.
+
+### How the Database Was Built
+
+| Phase | Tool(s) | Source | What It Contributed |
+|-------|---------|--------|---------------------|
+| 1. Title seeding | `fetch-anime-offline-db.py` | [anime-offline-database](https://github.com/manami-project/anime-offline-database) (MIT license) | 10,000+ anime titles, English/Japanese/romaji names, aliases, cross-reference IDs |
+| 2. jpdb ratings | `fetch-jpdb-ratings.py` | jpdb.io public anime difficulty list | Difficulty scores (1–100 scale) for ~1,399 anime titles |
+| 3. TMDB enrichment | `fetch-tmdb-netflix.py`, `build-rated-db.py` | [TMDB API](https://www.themoviedb.org/documentation/api) | Non-anime Japanese live-action titles and platform aliases for Netflix |
+| 4. LearnNatively ratings | `fetch-ln-*.py` (catalog, ratings, videos, all-pages, etc.) | LearnNatively public API endpoints | Difficulty levels (L0–40+), JLPT approximations, Japanese/English titles for 5,000+ entries |
+| 5. Merge & build | `build-merged-db.py` | All of the above | Final `media-index.json` — merged, deduplicated, normalized, cross-referenced |
+
+All tools live in `jp-difficulty-overlay/tools/`. The pipeline runs offline during development — never from the browser extension.
+
+### Source License Compliance
+
+- **anime-offline-database** — MIT license. We credit manami-project and retain `sources` fields for cross-referencing.
+- **TMDB API** — Used with attribution. TMDB data is for title/alias enrichment only, never difficulty ratings.
+- **jpdb & LearnNatively** — Publicly accessible pages and endpoints. Data is used solely for difficulty references.
+
+### What the Pipeline Does NOT Do
+
+- ❌ No scraping of Netflix or Crunchyroll content, subtitles, or catalogs
+- ❌ No scraping of jpdb or LearnNatively — only public endpoints/difficulty lists
+- ❌ No automated rating import from any source without human review
+- ❌ No storing of copyrighted content, images, descriptions, or episode data
+- ❌ No runtime API calls from the extension itself
+
+### Contributing in the Context of This Pipeline
+
+When you add new entries to `media-index.json`, follow the same data rules:
+
+- **DO** add: titles, aliases, difficulty ratings you verified on LearnNatively/jpdb, source URLs
+- **DO NOT** add: anything listed in "What Is NEVER Stored" (subtitles, images, reviews, etc.)
+- **DO** use the tools in `tools/` to cross-reference new entries against existing sources
+- **DO NOT** add data sourced by scraping any platform or service
+
+If you discover a title that's missing from the database, you can:
+1. Check if it exists in `anime-offline-database` — if so, it's in our candidate pool
+2. Look up its difficulty on LearnNatively or jpdb manually
+3. Add the entry via the "How to Contribute" workflow below
+
+---
+
 ## What You Can Contribute
 
 ### Add or Update Entries in `media-index.json`
