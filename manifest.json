@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "JP Difficulty Overlay",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Adds Japanese-learning difficulty ratings to Netflix and Crunchyroll using a local community-maintained index.",
   "permissions": [
     "storage"
