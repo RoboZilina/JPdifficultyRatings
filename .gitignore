@@ -17,9 +17,18 @@ node_modules/
 *.zip
 
 # Build output and generated data
-data/
+data/*
+!data/media-index-merged.json
+!data/ln-video-catalog.json
+!data/ln-book-catalog-partial.json
+!data/candidates_with_all.json
 files/
 files2/
+
+# Backups
+backups/
+*.bak
+*.bak2
 
 # Screenshots and debug output
 *.png
@@ -27,3 +36,4 @@ blue-box-results.txt
 blue-box-results2.txt
 check-blue-box-output.txt
 build-output.txt
+match_report.txt
