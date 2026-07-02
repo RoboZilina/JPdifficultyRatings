@@ -47,41 +47,77 @@ Detected: [Title]
 
 ## Privacy & Legal Scope
 
-This extension:
+This extension is **fully local and private**. It does not phone home, track users, or collect any data.
 
-- ✅ Does NOT scrape Netflix or Crunchyroll
-- ✅ Does NOT scrape LearnNatively or jpdb
-- ✅ Does NOT fetch from external sites
-- ✅ Does NOT download subtitles
-- ✅ Does NOT read or store video data
-- ✅ Does NOT store viewing history
-- ✅ Does NOT collect personal data
+### Runtime Behavior (What the extension does at all times)
 
-It only uses:
+- ✅ Reads a local bundled `media-index.json` file
+- ✅ Reads optional user-created local mappings from Chrome local storage
+- ✅ Opens outbound links only when the user clicks them (to LearnNatively or jpdb)
+- ✅ Zero network activity from the extension itself — no runtime API calls, no analytics, no telemetry
 
-- A local bundled `media-index.json` file
-- Optional user-created local mappings stored in Chrome local storage
-- Normal user-initiated outbound links
+### What We Do NOT Do (Legal Guardrails)
+
+- ✅ Does NOT scrape Netflix or Crunchyroll pages, content, or subtitles
+- ✅ Does NOT download or read video data, subtitles, or audio tracks
+- ✅ Does NOT store or transmit viewing history, account info, or personal data
+- ✅ Does NOT mirror or redistribute Netflix or Crunchyroll catalogs
+- ✅ Does NOT run external API calls from the browser extension
+- ✅ Does NOT inject ads, trackers, or analytics
+
+---
 
 ## Data Rules
 
-**Allowed in the database:**
+### What Is Stored in the Database
+
+Only minimal metadata is stored in `media-index.json`:
 
 - Title names (English, Japanese, romaji)
-- Aliases for matching
-- LearnNatively difficulty ratings and JLPT approximations
-- jpdb difficulty ratings
-- Links to LearnNatively and jpdb
+- Common aliases for matching
+- LearnNatively difficulty levels and JLPT approximations
+- jpdb difficulty scores
+- Links to LearnNatively and jpdb detail pages
 
-**Not allowed:**
+### What Is NEVER Stored
 
-- Subtitles
-- Dialogue or scripts
-- Vocabulary lists or example sentences
-- Copied descriptions or plot summaries
-- Images, posters, or screenshots
-- Episode metadata or deck contents
-- User viewing history or account data
+- ❌ Subtitles, dialogue, or scripts
+- ❌ Vocabulary lists, example sentences, or studied words
+- ❌ Copied descriptions, plot summaries, or reviews
+- ❌ Images, posters, or screenshots
+- ❌ Episode metadata, season details, or deck contents
+- ❌ User viewing history or account data
+- ❌ Netflix or Crunchyroll catalog dumps
+- ❌ Copyrighted material of any kind
+
+---
+
+## How the Database Was Built (Data Pipeline)
+
+The current `media-index.json` (5,820 entries) was built using a one-time, offline batch process. All tools are in `jp-difficulty-overlay/tools/`. The pipeline is never called from the browser extension.
+
+| Phase | Tool Script | Source | What It Contributed |
+|-------|-------------|--------|---------------------|
+| 1. Title seeding | `fetch-anime-offline-db.py` | [anime-offline-database](https://github.com/manami-project/anime-offline-database) (MIT license) | 10,000+ anime titles, English/Japanese/romaji names, aliases, cross-reference IDs |
+| 2. jpdb ratings | `fetch-jpdb-ratings.py` | jpdb.io public anime difficulty list pages | Difficulty scores (1–100 scale) for ~1,399 anime titles |
+| 3. TMDB enrichment | `fetch-tmdb-netflix.py`, `build-rated-db.py` | [TMDB API](https://www.themoviedb.org/documentation/api) (requires API key, attribution required) | Non-anime Japanese live-action titles and platform aliases for Netflix |
+| 4. LearnNatively ratings | `fetch-ln-*.py` (catalog, ratings, videos, all-pages, etc.) | LearnNatively public API endpoints | Difficulty levels (L0–40+), JLPT approximations, and Japanese/English titles for 5,000+ entries |
+| 5. Merge & build | `build-merged-db.py` | All of the above | Final `media-index.json` — merged, deduplicated, normalized, cross-referenced |
+
+All sources are queried at build time only. No external data is fetched at extension runtime.
+
+### Source License Compliance
+
+- **anime-offline-database** — MIT license. We credit manami-project and retain the `sources` field for cross-references.
+- **TMDB API** — Used with attribution. TMDB data is for title/alias enrichment only, never for difficulty ratings.
+- **jpdb & LearnNatively** — Publicly accessible pages and endpoints. No APIs were reverse-engineered. Data is used for difficulty referencing only.
+
+### What the Pipeline Does NOT Do
+
+- ❌ No scraping of Netflix or Crunchyroll content or subtitles
+- ❌ No scraping of jpdb or LearnNatively — only public endpoints/difficulty lists
+- ❌ No automated import of ratings from any source — all data is reviewed and constrained by the build script
+- ❌ No storing of copyrighted content, images, descriptions, or episode data
 
 ## Installation
 
@@ -93,6 +129,34 @@ It only uses:
 6. The extension is now installed!
 
 Open Netflix or Crunchyroll and you should see the overlay on title pages.
+
+## Setting Up on a New PC
+
+A 3-step guide to get the extension running on any computer — no tools or API keys needed.
+
+### 1. Get the files
+
+```bash
+git clone https://github.com/RoboZilina/JPdifficultyRatings.git
+```
+
+Or copy the `jp-difficulty-overlay` folder from another PC via USB/cloud.
+
+> ⚠️ Keep it as a folder — Chrome cannot load zipped extensions.
+
+### 2. Install
+
+1. Open Chrome and go to **`chrome://extensions`**
+2. Enable **Developer Mode** (top-right toggle)
+3. Click **Load unpacked** → select the `jp-difficulty-overlay` folder
+
+### 3. Verify
+
+Open **Netflix** or **Crunchyroll** and navigate to a title page. The overlay appears near the title area.
+
+**No overlay?** You might be on a browse/search page — click into a specific title. For other issues, see [SETUP.md](SETUP.md).
+
+All titles, ratings, and data are bundled in the extension — no internet connection needed after installation.
 
 ## Local Mappings
 
