@@ -1,0 +1,19 @@
+# Build output and generated data
+data/
+files/
+files2/
+backups/
+*.bak
+*.bak2
+
+# Debug output
+*.txt
+*.png
+*.zip
+check-blue-box-output.txt
+verify_output.txt
+verify_counts.txt
+
+# OS files
+Thumbs.db
+Desktop.ini
