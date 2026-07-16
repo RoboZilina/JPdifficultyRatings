@@ -26,6 +26,10 @@ function getPlatform() {
     return "crunchyroll";
   }
 
+  if (host.includes("disneyplus.com")) {
+    return "disneyplus";
+  }
+
   return "unknown";
 }
 
@@ -123,8 +127,9 @@ async function buildSearchIndex() {
     if (item.platformAliases) {
       const platformAliases = item.platformAliases.netflix || [];
       const crunchyrollAliases = item.platformAliases.crunchyroll || [];
+      const disneyplusAliases = item.platformAliases.disneyplus || [];
 
-      for (const alias of [...platformAliases, ...crunchyrollAliases]) {
+      for (const alias of [...platformAliases, ...crunchyrollAliases, ...disneyplusAliases]) {
         addToSearchIndex(alias, item.id);
       }
     }
@@ -325,6 +330,10 @@ function detectCurrentTitle() {
 
   if (platform === "crunchyroll") {
     return extractCrunchyrollTitle();
+  }
+
+  if (platform === "disneyplus") {
+    return extractNetflixTitle();
   }
 
   return null;

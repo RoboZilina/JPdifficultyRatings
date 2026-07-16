@@ -8,13 +8,15 @@
   ],
   "host_permissions": [
     "https://www.netflix.com/*",
-    "https://www.crunchyroll.com/*"
+    "https://www.crunchyroll.com/*",
+    "https://www.disneyplus.com/*"
   ],
   "content_scripts": [
     {
       "matches": [
         "https://www.netflix.com/*",
-        "https://www.crunchyroll.com/*"
+        "https://www.crunchyroll.com/*",
+        "https://www.disneyplus.com/*"
       ],
       "js": [
         "content.js"
@@ -32,7 +34,8 @@
       ],
       "matches": [
         "https://www.netflix.com/*",
-        "https://www.crunchyroll.com/*"
+        "https://www.crunchyroll.com/*",
+        "https://www.disneyplus.com/*"
       ]
     }
   ],
