@@ -93,6 +93,7 @@ async function saveMapping(event) {
     platformAliases: {
       netflix: detectedTitle ? [detectedTitle] : [],
       crunchyroll: detectedTitle ? [detectedTitle] : [],
+      disneyplus: detectedTitle ? [detectedTitle] : [],
     },
     ratings: {
       learnnatively: {

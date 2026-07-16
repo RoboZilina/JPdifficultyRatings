@@ -318,6 +318,79 @@ function extractCrunchyrollTitle() {
 }
 
 // ============================================================================
+// Title Extraction - DisneyPlus
+// ============================================================================
+
+function extractDisneyPlusTitle() {
+  // DisneyPlus uses dynamic page titles. Try multiple strategies.
+
+  // Generic page titles to skip (homepage, navigation, etc.)
+  const genericTitles = [
+    "welcome back", "home", "search", "my stuff", "originals",
+    "movies", "series", "tv", "settings", "profile", "profiles",
+    "browse", "for you", "continue watching", "my list", "trending",
+    "new to disney+", "popular", "recommended", "collections",
+    "genres", "coming soon", "leaving soon", "extras", "trailers",
+    "behind the scenes", "bloopers", "deleted scenes", "music videos",
+    "short", "featurette", "bonus", "watchlist"
+  ];
+
+  function isGeneric(text) {
+    if (!text) return true;
+    const lower = text.toLowerCase().trim();
+    if (lower.length < 3) return true;
+    return genericTitles.includes(lower);
+  }
+
+  // Strategy 1: Page title from document.title
+  const documentTitle = document.title;
+  if (documentTitle && documentTitle !== "Disney+" && documentTitle !== "Disney Plus") {
+    // Remove common suffixes
+    const cleaned = documentTitle
+      .replace(/\s*[-–]\s*Disney\+.*$/i, "")
+      .replace(/\s*\|\s*Disney\+.*$/i, "")
+      .replace(/\s*[-–]\s*Disney Plus.*$/i, "")
+      .replace(/\s*\|\s*Disney Plus.*$/i, "")
+      .trim();
+    if (cleaned && cleaned.length > 0 && !isGeneric(cleaned)) {
+      return cleaned;
+    }
+  }
+
+  // Strategy 2: Look for title in h1 elements
+  const h1Elements = document.querySelectorAll("h1");
+  for (const h1 of h1Elements) {
+    const text = h1.textContent?.trim();
+    if (text && text.length > 2 && text.length < 200 && !isGeneric(text)) {
+      return text;
+    }
+  }
+
+  // Strategy 3: Look for role="heading" aria-level="1"
+  const mainHeading = document.querySelector('[role="heading"][aria-level="1"]');
+  if (mainHeading) {
+    const text = mainHeading.textContent?.trim();
+    if (text && text.length > 2 && !isGeneric(text)) {
+      return text;
+    }
+  }
+
+  // Strategy 4: Look in main content area
+  const main = document.querySelector("main");
+  if (main) {
+    const headings = main.querySelectorAll("h1, h2");
+    for (const heading of headings) {
+      const text = heading.textContent?.trim();
+      if (text && text.length > 2 && text.length < 200 && !isGeneric(text)) {
+        return text;
+      }
+    }
+  }
+
+  return null;
+}
+
+// ============================================================================
 // Detect Title Based on Platform
 // ============================================================================
 
@@ -333,7 +406,7 @@ function detectCurrentTitle() {
   }
 
   if (platform === "disneyplus") {
-    return extractNetflixTitle();
+    return extractDisneyPlusTitle();
   }
 
   return null;
